@@ -1,0 +1,143 @@
+Login system
+	- To maximize the realism, a text file should be created that contains the login information regarding a specific account.
+	  Upon each login attempt this text file should be opened and used to verify the credentials for a given login attempt
+	  	- Maybe search through this file scanning each line for the username the user provided.
+	  	  If the given username is found, proceed with comparing the password associated with that username.
+		- Until a GUI is developed, we have to handle credential input one piece at a time. That is, we ask 
+		  for a username, scan the text file for an account that has that username and then once it is proven that
+		  that username is associated with an existing account we can ask the user for a password. From that point, verification
+		  is easy because we are literally just comparing what the user inputted to what is present in the password field in the 
+		  text file and if they match we allow the user entry.
+		- This would get us accustomed to working with file I/O and I believe could help all three of us tremendously
+		- We must include a way to overwrite this text file with new information, "log in as new user" is a menu option.
+		- Transaction history that is account specific
+		- Make sure if you enter a basic user account's credentials at the admin's login prompt it doesn't authenticate the standard user
+			- In the text file 
+		- Something that determines when a user account already exists so we don't create duplicate user/admin accounts
+		- Put limits on the password creation that stops a user from creating a password that contains certain characters (i.e. |,~)
+		  so we can use those character as delimiters in the text file
+		- Have to sign in as an admin to create/delete accounts other than your own
+		- Upon the deletion of an account, the user must supply a password to verify that the correct account is
+		  being deleted (account of the user that is currently logged in)
+		- If there is nothing in the ArrayList of accounts (if some knucklehead deletes everything in there) it must be populated
+		  with an initial account with default credentials so that the program can be used to create another account
+		  
+	- How to keep track of who is currently logged in?
+		- There must be a variable that holds the account object (customer/admin) that is currently logged in
+		- This will ensure there can only be one account active at any one time
+		
+Bidders
+	- Just like the customer class, fields to this one include the max bid, name, etc. 
+	
+
+Bids
+	- Timestamping each bid for the purpose of record keeping
+	- "Winnning bids" refer to the bids that won the auction, the bid that was submitted that resulted in that bid's 
+	  customer winning the auction 
+	- "Active bids" are part of an active and ongoing auction. They refer to bids that are still relevant in a live
+  	  auction that has not yet finished
+	
+	
+Auctions
+	- Auctions are only open from 9 to 5, so bids placed outside of those hours get stored for backlogging data
+	- Auctions only accept bids from a specified start time and the specified end time 
+	  There exist some classes that are capable of taking the time from your local machine and producing input based on that
+
+
+Menu items that still don't work:
+	
+	Main Menu (for Admin/Customer/logged out)
+	- Process backlogged data
+	
+	Admin Options Menu
+	- Choose an ongoing auction and check the bidding history
+	- List information about completed auctions
+	- Summary data of winning bids
+
+	Customer Options Menu
+	- Pay for an item that I won
+
+Additional menu options
+	
+	Customer Options Menu
+	- Implement a balance for each account
+	- menu option that allows each customer to make a deposit on their account balance
+	  (We can then tie the "pay for an item that I won" option to this account balance)
+	  
+
+	-------------------------------------------------------------------------------------------------
+	Clay 2/19/21
+	
+	- Added a class for strictly testing/debugging methods called testing. This will get deleted when we submit our assignment
+	- Added constructors to the account, customer, and admin methods for creating account when read in from a file (needed to include ID)
+	- Adjusted the readWriteAccounts class to match the addition of the ID field
+	- Wrote and tested a CreateAccount class that will create admin and customer accounts
+	- Added an input methods class for methods we will commonly use to get input from the user
+	- Added an InvalidInputException class for reasons we have already discussed
+	- Included a simple menu in main to test the creation of accounts and outputting/inputting them from a file 
+	__________________________________________________________________________________________________________
+	
+	Kevin 2/25/21
+	
+	- Added two new classes, AdminOptions and CustomerOptions, to hold the if construct that governs the admin and the customer menus
+	- Made the driver incorporate the two new classes so that the menus transition into and out of one another in logical way
+	- Cleaned up the driver, and removing the methods that were deprecated and meant for a previous version of the program and 
+	  labeling the methods that are still relevant and in use.
+	- Changed the way the menus print, each menu now has a header for easier distinguishing
+	- Added the methods customerSubMenu and adminSubMenu which acts an in-between for the main menu and the admin/customer menu.
+	  This menu asks the user if he wants to log in as a new account or an existing one
+	  
+	   __________________________________________________________________________________________________________
+	 Clay 2/25/21
+	 
+	 - Github Test
+	 
+	 __________________________________________________________________________________________________________
+	 Austin 2/27/21
+	 
+	 -Testing Commit	
+	 
+	 __________________________________________________________________________________________________________________ 
+	  Kevin 3/2/2021
+	  
+	  - Developed more of the framework for the Bid, Auction, and Customer class in preparation for future
+	    communication between those types
+	
+	____________________________________________________________________________________________________________________
+	  Kevin 3/4/21
+	
+ 	  - Added a list of items to the driver in the loadItems() method. 
+ 	  - Adjusted the main menu so that there are now 6 options - one of them is the loadItemData option
+	____________________________________________________________________________________________________________________
+	Clay 3/4/21
+	
+	- Changed nextNum in the item class to static (all items had an id of 100 before)
+	
+	- Changed the toString of the item class to print the price in currency format
+	
+	- Moved menuClay to the testing class
+	
+	- Adjust getUsername and getPassword in createAccount to more efficiently validate input
+	
+	- Added (yes or no) to a few existing printlns
+	
+	- Added a line to some of kevins if statements
+	
+	- Adjusted the login method in the account validation class to ask the user if they would like to try 
+	  a different username/password after an invalid entry is made. Did this to avoid the situation where a 
+	  user forgets username/password and is stuck in an infinite loop of guessing.
+		
+	- Split menuUserLoggedIn into two sepearate menus in the driver. One for admin logged in and one for customer logged in
+	
+	- Utilized one method to validate input for all of the menu selections in the menu class. The method that does this is in the InputMethods class
+	
+	- Changed yesNoToBool in the InputMethods class so that the method prints the question the first time.
+	
+	_____________________________________________________________________________________________________________________
+	Kevin 3/17/21
+	
+	- Added the Queue and Stack classes 
+	- Added the throw error line when user tries to pop from an empty stack or dequeue from an empty cue
+	  and fixed a bug in which the prev field of each Node would never get overwritten
+	- Also made Queue class and the Stack class generic
+ 	  

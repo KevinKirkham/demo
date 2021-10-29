@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="rinosJavaSalesProject.JUnit_returnHighestInt" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/JUnit_returnHighestInt.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="186" x="236" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="rinosJavaSalesProject.Testing" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Testing.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="178" width="232" x="462" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="rinosJavaSalesProject.Read" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Read.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="664" width="695" x="734" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="rinosJavaSalesProject.Admin" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Admin.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="376" width="269" x="5991" y="1228"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="rinosJavaSalesProject.ObjectALMergeSort" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/ObjectALMergeSort.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="214" x="1469" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="rinosJavaSalesProject.TimeMethods" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/TimeMethods.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="88" width="121" x="1723" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="rinosJavaSalesProject.ReadWriteAccounts" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/ReadWriteAccounts.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="184" x="1884" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="rinosJavaSalesProject.Stack.Node" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Stack.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="141" x="6007" y="4116"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="rinosJavaSalesProject.MainMenuOptions" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/MainMenuOptions.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="200" x="2108" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="rinosJavaSalesProject.Queue.Node" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Queue.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="141" x="5789" y="4116"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="rinosJavaSalesProject.Menu" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Menu.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="304" width="234" x="2348" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="rinosJavaSalesProject.Write" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Write.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="502" width="417" x="2622" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="rinosJavaSalesProject.Driver" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Driver.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="430" width="238" x="5991" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="rinosJavaSalesProject.CurrentUser" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/CurrentUser.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="153" x="5760" y="595"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="rinosJavaSalesProject.LinkedList" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/LinkedList.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="232" width="149" x="5342" y="1788"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="rinosJavaSalesProject.NullDataException" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/NullDataException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="175" x="3079" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="rinosJavaSalesProject.LinkedList.Node" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/LinkedList.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="157" x="5342" y="2510"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="rinosJavaSalesProject.AccountValidation" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/AccountValidation.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="257" x="3294" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="rinosJavaSalesProject.SystemMessage" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/SystemMessage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="139" x="3591" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="rinosJavaSalesProject.Customer" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Customer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="520" width="260" x="5552" y="1228"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="rinosJavaSalesProject.InputMethods" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/InputMethods.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="244" x="3770" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="rinosJavaSalesProject.Auction" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Auction.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="934" width="343" x="5898" y="2510"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="rinosJavaSalesProject.AdminOptions" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/AdminOptions.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="127" x="4054" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="rinosJavaSalesProject.Bid" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Bid.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="682" width="306" x="5552" y="1788"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="rinosJavaSalesProject.CreateAccount" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/CreateAccount.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="195" width="226" x="4221" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="rinosJavaSalesProject.CustomerOptions" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/CustomerOptions.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="149" x="4487" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="rinosJavaSalesProject.ObjectALInsertionSort" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/ObjectALInsertionSort.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="203" x="4676" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="rinosJavaSalesProject.Queue" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Queue.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="304" width="178" x="5789" y="3484"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="rinosJavaSalesProject.Stack" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Stack.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="304" width="178" x="6007" y="3484"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="rinosJavaSalesProject.JUnit_isValid_Test1" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/JUnit_isValid_Test1.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="161" x="5898" y="1788"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="rinosJavaSalesProject.JUnit_validatePassword_Test3" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/JUnit_validatePassword_Test3.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="142" width="241" x="4919" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="rinosJavaSalesProject.JUnit_isValid_Test2" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/JUnit_isValid_Test2.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="161" x="6099" y="1788"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="rinosJavaSalesProject.JUnit_validatePassword_Test2" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/JUnit_validatePassword_Test2.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="142" width="241" x="5200" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="rinosJavaSalesProject.Item" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Item.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="592" width="269" x="5342" y="3484"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="rinosJavaSalesProject.Account" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Account.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="411" width="210" x="5760" y="777"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="rinosJavaSalesProject.InvalidInputException" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/InvalidInputException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="189" x="5481" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="rinosJavaSalesProject.JUnit_validatePassword_Test1" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/JUnit_validatePassword_Test1.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="142" width="241" x="5710" y="-109"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="38">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="39" name="prev"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="41">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="42" name="next"/>      
+      <multiplicity id="43" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="44">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="45" name="last"/>      
+      <multiplicity id="46" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="47">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="48" name="first"/>      
+      <multiplicity id="49" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="50">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="51" name="auction"/>      
+      <multiplicity id="52" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="53">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="54" name="currentHighest"/>      
+      <multiplicity id="55" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="56">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="57" name="processedBids"/>      
+      <multiplicity id="58" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="59">    
+    <bendpoint x="6000" y="595"/>    
+    <bendpoint x="6000" y="777"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="60" name="rootUser"/>      
+      <multiplicity id="61" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="62">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="10"/>  
+  </nesting>  
+  <association id="63">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="64" name="first"/>      
+      <multiplicity id="65" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="66">    
+    <bendpoint x="6290" y="595"/>    
+    <bendpoint x="6290" y="777"/>    
+    <bendpoint x="6290" y="1228"/>    
+    <bendpoint x="6290" y="1788"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="67" name="completedAuctions"/>      
+      <multiplicity id="68" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="69">    
+    <bendpoint x="5943" y="595"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="70" name="accounts"/>      
+      <multiplicity id="71" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="72">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="73" name="winningBids"/>      
+      <multiplicity id="74" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="75">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="76" name="item"/>      
+      <multiplicity id="77" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="78">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="8"/>  
+  </nesting>  
+  <association id="79">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="80" name="auction"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="83" name="historicBids"/>      
+      <multiplicity id="84" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="85">    
+    <bendpoint x="6311" y="595"/>    
+    <bendpoint x="6311" y="777"/>    
+    <bendpoint x="6311" y="1228"/>    
+    <bendpoint x="6311" y="1788"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="86" name="ongoingAuctions"/>      
+      <multiplicity id="87" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="88">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="17"/>  
+  </nesting>  
+  <association id="89">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="90" name="user"/>      
+      <multiplicity id="91" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="92">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="93" name="last"/>      
+      <multiplicity id="94" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="95">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="96" name="last"/>      
+      <multiplicity id="97" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="98">    
+    <bendpoint x="5311" y="595"/>    
+    <bendpoint x="5311" y="777"/>    
+    <bendpoint x="5311" y="1228"/>    
+    <bendpoint x="5311" y="1788"/>    
+    <bendpoint x="5311" y="2510"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="99" name="items"/>      
+      <multiplicity id="100" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="101">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="102" name="prev"/>      
+      <multiplicity id="103" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="104">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="105" name="customer"/>      
+      <multiplicity id="106" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="107">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="108" name="currentUser"/>      
+      <multiplicity id="109" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="110">    
+    <bendpoint x="5521" y="595"/>    
+    <bendpoint x="5521" y="777"/>    
+    <bendpoint x="5521" y="1228"/>    
+    <bendpoint x="5521" y="1788"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="111" name="futureAuctions"/>      
+      <multiplicity id="112" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="113">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="35"/>  
+  </generalization>  
+  <association id="114">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="115" name="prev"/>      
+      <multiplicity id="116" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="117">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="118" name="next"/>      
+      <multiplicity id="119" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="120">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="121" name="item"/>      
+      <multiplicity id="122" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="123">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="124" name="first"/>      
+      <multiplicity id="125" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="126">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="127" name="activeBids"/>      
+      <multiplicity id="128" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="129">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="130" name="unprocessedBids"/>      
+      <multiplicity id="131" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="132">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="35"/>  
+  </generalization>  
+  <association id="133">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="134" name="auction"/>      
+      <multiplicity id="135" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="136">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="137" name="next"/>      
+      <multiplicity id="138" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
