@@ -1,7 +1,8 @@
 Overview
 
-This was the team-based final project for my CSC 202 course that I took while at Virginia Western Community College. Teams of 3 or 4 were to incorporate everything that 
-the course covered over the 16-week semester - file I/O, stacks, queues, binary trees, database connectivity with JDBC, among other aspects of object-oriented design.
+This was the team-based final project for my CSC 202 course (level II Java Programming) that I took while at Virginia Western Community College. Teams of 3 or 4 were to
+incorporate everything that the course covered over the 16-week semester - file I/O, stacks, queues, binary trees, database connectivity with JDBC, among other aspects of
+object-oriented design.
 
 The goal of this project was to create a virtual auction house in which a customer could select an auction from a provided list, and place a bid on and potentially win the 
 item being auctioned off. Auctions could be created by admins, include an admin-chosen item from a list of items, and were to open and close at times that the administrator 
