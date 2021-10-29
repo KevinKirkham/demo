@@ -1,4 +1,10 @@
-Readme
+Overview
+
+This was the team-based final project for my CSC 202 course that I took while at Virginia Western Community College. Teams of 3 or 4 were to incorporate everything that the course covered over the 16-week semester - file I/O, stacks, queues, binary trees, database connectivity with JDBC, among other aspects of object-oriented design.
+
+The goal of this project was to create a virtual auction house in which a customer could select an auction from a provided list, and place a bid on and potentially win the item being auctioned off. Auctions could be created by admins, include an admin-chosen item from a list of items, and were to open and close at times that the administrator specified. User data was to be both readable and writeable, that is to say that the information that pertained to a specific user should be able to be loaded into the program and written to an external file. This file was expanded during the project's development to include information regarding every object used in the program. Included in the rhinosJavaSalesProject package is the input_file.txt file - this is a file that can be loaded upon starting up the program and populates the program's data structures with objects that can be used during the program's execution. The format of the file is of my own creation and somewhat unintuitive as this was my first time ever attempting such a task.
+
+User manual
 
 Main menu
 
