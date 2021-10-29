@@ -1,0 +1,134 @@
+JUnit tests for the Java Sales Project
+
+
+Current tests:
+
+JUnit_isValid_Test1.java
+	- Method being tested: public boolean isValid(Bid bid) in the Auction class
+	- Purpose of the test: Verify a bid that is less than (salesprice + increment) is deemed invalid by the method.
+	- Fails the test if: the method returns true (indicating the bid was marked as valid)
+	- Passes the test if: the method returns false (indicating the bid was marked invalid)
+	- Result: Passed
+
+JUnit_isValid_Test2.java
+	- Method being tested: public boolean isValid(Bid bid) in the Auction class
+	- Purpose of the test: Verify a bid that is equal to (salesprice + increment) is deemed valid by the method.
+	- Fails the test if: the method returns false (indicating the bid was marked as invalid)
+	- Passes the test if: the method returns true (indicating the bid was marked valid)
+	- Result: Passed
+
+JUnit_validatePassword_Test1.java
+	- Method being tested: public static int validatePassword(String password) in the CreateAccount class
+	- Purpose of the test: Verify a password containing a '|' character is deemed invalid
+	- Fails the test if: the method returns 0 (indicating the password was deemed valid). 
+	- Passes the test if: the method returns a 1 (indicating the bid was marked invalid)
+	- Result: Passed
+
+JUnit_validatePassword_Test2.java
+	- Method being tested: public static int validatePassword(String password) in the CreateAccount class
+	- Purpose of the test: Verify a password containing a ',' character is deemed invalid
+	- Fails the test if: the method returns 0 (indicating the password was deemed valid). 
+	- Passes the test if: the method returns a 1 (indicating the bid was marked invalid)
+	- Result: Passed
+
+JUnit_validatePassword_Test3.java
+	- Method being tested: public static int validatePassword(String password) in the CreateAccount class
+	- Purpose of the test: Verify a password containing no illegal characters is deemed valid
+	- Fails the test if: the method returns 1 (indicating the password was deemed invalid). 
+	- Passes the test if: the method returns a 0 (indicating the bid was marked valid)
+	- Result: Passed
+
+JUnit_returnHighestInt
+	- Method being tested: public int returnHighestInt(int[] integers) in the Auction class
+	- Purpose of the test: Verify the method returns 27 when 27 is the greatest integer in the array
+	- Fails the test if: the method returns something other than 27
+	- Passes the test if: the method returns 27
+	- Result: Passed
+
+
+
+
+Ideas for future tests:
+
+Test for Log in method - Creating new Customer:
+	- Ensures that we can create a new customer account. The variables/objects involved are the string 
+	  username and the string password which represent the username and password respectively.
+	- If we successfully create a new account it will print "The new account has been created" 
+	  and it will overwrite the currentUser field in the driver as well as add the new user to the arraylist of accounts; therefore showing the code works.
+	- The only ways to make the code fail is to input:
+		a) A username that is the same as another accounts username
+		b) A username that contains an illegal character EX: a "|" 
+		c) A password that contains an illegal character EX: a "|"
+
+
+Test for Log in method - Logging in as existing Customer:
+	- Ensures that we can log in to an existing customer account. The variables/objects involved are the string 
+	  username, the string password, the boolean validUsername, and the boolean validPassword which 
+	  represent the username, password, the validity of said username, and the validity of said password respectively.
+	- If we successfully log in to the account it will print "Successful login attempt" 
+	  and it will overwrite the currentUser field in the driver.
+	- The only ways to make the code fail is to input:
+		a) A username that does not match any usernames of the accounts in the account arraylist.
+		b) A password that does not match the password of the account that shares the username 
+		   that you are attempting to log in as.
+
+
+Test for Log in method - Logging in as an Admin:
+	- Ensures that we can log in to an existing admin account. The variables/objects involved are the string 
+	  username, the string password, the boolean validUsername, and the boolean validPassword which 
+	  represent the username, password, the validity of said username, and the validity of said password respectively.
+	- If we successfully log in to the account it will print "Successful login attempt" 
+	  and it will overwrite the currentUser field in the driver.
+	- The only ways to make the code fail is to input:
+		a) A username that does not match any usernames of the account in the account arraylist.
+		b) A password that does not match the password of the account that shares the username 
+		   that you are attempting to log in as.
+
+
+Test for method that processes bids - Bid smaller than sales price:
+	- Ensures that we cannot place a bid that is invalid. The variables/objects involved are the integer 
+	  auctionIndex, the Auction auction, the double value, and the Bid b which 
+	  represent the index of the auction the bid is to be placed on, the auction the bid is placed on,
+	  the amount of money to be placed on the bid, and the bid object itself.
+	- If we successfully place the bid it will print out "*SYSTEM MESSAGE: Processing Bid: " followed by 
+	  a summary of the bid which includes the item name, the customer username, the bid amount, and the auction id;
+	  the program will then add the bid to to the arraylist activeBids in the customers field as well as push it 
+	  into the stack of bids in the auction.
+	- The only ways to make the bid invalid or the code to fail is to input:
+		a) An amount of money smaller than the sales price
+		b) An amount of money between the sales price and the sales price plus an increment
+		c) An amount of money between the current highest bid and the current highest bid plus an increment
+		d) A different type of data than was expected EX: a string when it expected a double
+
+
+Test for method that processes bids - Bid smaller than highest bid:
+	- Ensures that we can place a bid that is smaller than the highest bid. The variables/objects involved are the integer 
+	  auctionIndex, the Auction auction, the double value, and the Bid b which 
+	  represent the index of the auction the bid is to be placed on, the auction the bid is placed on,
+	  the amount of money to be placed on the bid, and the bid object itself.
+	- If we successfully place the bid it will print out "*SYSTEM MESSAGE: Processing Bid: " followed by 
+	  a summary of the bid which includes the item name, the customer username, the bid amount, and the auction id;
+	  the program will then add the bid to to the arraylist activeBids in the customers field as well as push it 
+	  into the stack of bids in the auction. Finally it will change the current sales price to the bid that was just placed plus an increment.
+	- The only ways to make the bid invalid or the code to fail is to input:
+		a) An amount of money smaller than the sales price
+		b) An amount of money between the sales price and the sales price plus an increment
+		c) An amount of money between the current highest bid and the current highest bid plus an increment
+		d) A different type of data than was expected EX: a string when it expected a double
+
+
+Test for method that processes bids - Bid higher than highest bid:
+	- Ensures that we can place a bid that is higher than the current highest bid. The variables/objects involved are the integer 
+	  auctionIndex, the Auction auction, the double value, and the Bid b which 
+	  represent the index of the auction the bid is to be placed on, the auction the bid is placed on,
+	  the amount of money to be placed on the bid, and the bid object itself.
+	- If we successfully place the bid it will print out "*SYSTEM MESSAGE: Processing Bid: " followed by 
+	  a summary of the bid which includes the item name, the customer username, the bid amount, and the auction id;
+	  the program will then add the bid to to the arraylist activeBids in the customers field as well as push it 
+	  into the stack of bids in the auction. Finally it will change the current sales price to the previous highest bid plus an increment then change 
+	  the current highest bid to the bid that was just placed.
+	- The only ways to make the bid invalid or the code to fail is to input:
+		a) An amount of money smaller than the sales price
+		b) An amount of money between the sales price and the sales price plus an increment
+		c) An amount of money between the current highest bid and the current highest bid plus an increment
+		d) A different type of data than was expected EX: a string when it expected a double
