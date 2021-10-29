@@ -10,7 +10,8 @@ specified. User data was to be both readable and writeable, that is to say that 
 and written to an external file. This file was expanded during the project's development to include information regarding every object used in the program. Included in the 
 rhinosJavaSalesProject package is the input_file.txt file - this is a file that can be loaded upon starting up the program and populates the program's data structures with 
 objects that can be used during the program's execution. The format of the file is of my own creation and somewhat unintuitive as this was my first time ever attempting such 
-a task.
+a task. I included a diagram of how my design for reading and writing information to and from files works in the rhinosJavaSalesProject package - ReadDocumentation.png depicts
+how the text file is broken up into blocks and how those blocks are used to create the objects that are to be acted upon in the program.
 
 User manual
 
