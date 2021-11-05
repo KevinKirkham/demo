@@ -1,0 +1,31 @@
+.input-box {
+    text-align: center;
+}
+
+.checkboxes {
+    text-align: center;
+}
+
+.checkboxes-group {
+    text-align: center;
+    display: inline-block;
+}
+
+.title {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.password {
+    text-align: center;
+    background-color: white;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.generator {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color:orangered;
+    border-width: 3px;
+    border-style: solid;
+}

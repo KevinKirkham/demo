@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Password Generator</title>
+
+        <!-- Link to FavIcon -->
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+
+        <!-- Link to CSS style sheet -->
+        <link rel="stylesheet" href="style/style.css">
+
+        <!-- Link to Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&family=Zen+Antique&display=swap" rel="stylesheet">
+    </head>
+
+    <body style=background-color:brown>
+        <div class="title">
+            <h2>Password Generator</h2>
+        </div>
+
+        <hr>
+
+        <div class="generator">
+
+            <div class="password">
+                <h3 id="password"></h3>
+            </div>
+
+            <div class="input-box">
+                <label for="length-input">Password Length</label>
+                <input type="text" id="length-input" placeholder="Input length...">
+            </div>
+            <br>
+            <div class="checkboxes">
+                <div class="checkboxes-group">
+                    <div>
+                        <label for="uppercase">Uppercase Letters</label>
+                        <input type="checkbox" id="uppercase">
+                    </div>
+            
+                    <div>
+                        <label for="lowercase">Lowercase Letters</label>
+                        <input type="checkbox" id="lowercase">
+                    </div>
+                </div>
+    
+                <div class="checkboxes-group">
+                    <div>
+                        <label for="numbers">Numbers</label>
+                        <input type="checkbox" id="numbers">
+                    </div>
+            
+                    <div>
+                        <label for="special">Special Characters</label>
+                        <input type="checkbox" id="special">
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="checkboxes">
+                <button type="button" onclick="generatePassword()">Generate Password</button>
+            </div>
+
+        </div>
+    
+        <script src="script/script.js"></script>
+    
+    </body>
+</html>
