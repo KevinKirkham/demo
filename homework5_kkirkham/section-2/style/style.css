@@ -1,0 +1,49 @@
+h1 {
+    color:lightskyblue;
+    text-align: center;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+h2 {
+    color:lightskyblue;
+    text-align: center;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+h3 {
+    color:lightskyblue;
+    text-align: center;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+h4 {
+    color:lightskyblue;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+h5 {
+    color:lightskyblue;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+p {
+    color:lightskyblue;
+    text-align: center;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+li {
+    color:lightskyblue;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.info-block {
+    font-family: 'Noto Sans', sans-serif;
+    padding-left: 550px;
+}
+
+
+.info-contents {
+    font-family: 'Noto Sans', sans-serif;
+    display: inline-block;
+}
