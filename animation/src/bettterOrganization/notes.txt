@@ -1,0 +1,10 @@
+Each shape that moves across the screen should have:
+
+	int b - Y-intercept, Y value of where the shape crosses X = 0 (left side of screen)
+	int projY - If deltaX is positive, this indicates Y-value where shape crosses X = screenWidth (right side of screen)
+	double slope - decimal value of the slope of the shape's trajectory
+	distanceToCollide - distance between shape's colliding edge's current location and the boundary it will collide with
+	framesUntilCollide - how many frames remain until the collision will happen
+	
+	
+	calculateIntercept() - calculates the shape's intercept based off of its X, Y, slope, screenHeight, and screenWidth
