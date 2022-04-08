@@ -1,0 +1,1 @@
+The purpose of this project was to store data in a heap data structure and then perform the sorting algorithm heap sort on it. A heap is a complete binary tree that satisfies the heap property: any parent must have a value that is greater than or equal to either of its children.
