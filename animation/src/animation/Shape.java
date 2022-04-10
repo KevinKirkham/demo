@@ -2,6 +2,20 @@ package animation;
 
 import java.awt.Graphics;
 
+/**
+ * The Shape acts as the parent from which each of the specific kinds of Shapes inherit. 
+ * 
+ * The ID system works just like subnetting a network to have IP address ranges: each shape has a unique 32-bit ID which is
+ * comprised of two portions, similar to the network and host portions of an IP address. The first 12 bits is the shape's
+ * prefix, which is unique to each type of shape. The remaining 20 bits are used for unique instantiations of that type of
+ * shape. Doing it this way allows for the creation of exactly 2^12 (4,096) different kinds of shapes, and of those kinds of
+ * shapes there can be exactly 2^20 (1,048,576) instantiations. So using this system we can ID exactly 4,096 * 1,048,576
+ * (4,294,967,296) unique shapes. A hard limit on the amount of shapes that can be created would let us know if there is some
+ * bug that is repeatedly spawning shapes.
+ * 
+ * @author Kevin Kirkham
+ *
+ */
 public abstract class Shape {
 	
 	/**
@@ -26,8 +40,10 @@ public abstract class Shape {
 	
 	/**
 	 * The ID of the shape, used for identifying it for removal from the rendering list.
+	 * It is comprised of a prefix, which comes from the kind of shape that the instantiation is, and a unique
+	 * portion which is unique to each instantiation of that shape.
 	 */
-	protected String shapedID;
+	protected int shapeID;
 	
 	public Shape(int x, int y) {
 		this.x = x;
@@ -53,6 +69,22 @@ public abstract class Shape {
 	 */
 	protected abstract Shape getWrapCompanion();
 	
+	/**
+	 * Increments the uniqueID variable given that it is less than 0x000FFFFF, the maximum number of instantiations we can
+	 * have for a given shape. An Exception is thrown if this condition is not met, halting execution of the program. 
+	 */
+	protected int incrementUniqueID(int uniqueID) {
+		try {
+			if (uniqueID < 0x000FFFFF) uniqueID++;
+			else throw new Exception("Failed to create Rocket - max number of Rockets already created!");
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.exit(0);
+		}
+		return uniqueID;
+	}
+	
 	protected void setPath(Path path) {
 		this.path = path;
 	}
@@ -60,7 +92,7 @@ public abstract class Shape {
 	protected void setAnimation(Animation animation) {
 		this.animation = animation;
 	}
-
+	
 	public int getX() {
 		return x;
 	}
@@ -117,6 +149,6 @@ public abstract class Shape {
 		return this.path.getEndY();
 	}
 	
-	public abstract String getShapeID();
+	public abstract int getShapeID();
 	
 }

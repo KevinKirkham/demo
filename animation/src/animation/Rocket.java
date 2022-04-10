@@ -9,8 +9,16 @@ import java.awt.Graphics2D;
  */
 public class Rocket extends Shape {
 
-	public static String ID = "ROC";
-	private String shapeID;
+	/**
+	 * Prefix unique to Rocket objects, first 12 bits of a Rocket's shape ID. This does not change among Rocket objects.
+	 */
+	public static final int PREFIX = 0x00100000;
+	
+	/**
+	 * Last 20 bits of a Rocket's shape ID, unique to each instantiation of a Rocket. Gets incremented by one with each new 
+	 * Rocket object created.
+	 */
+	private static int uniqueID = 0x00000000;
 	
 	private boolean reverse = false;
 	
@@ -28,7 +36,8 @@ public class Rocket extends Shape {
 		this.width = 100;
 		this.path = new Path(x, y, deltaX, deltaY, height, width);
 		this.animation = new Animation(150, 4, "/rocket_sprite_sheet.png", this.height, this.width);
-		this.shapeID = Rocket.ID;
+		this.shapeID = Rocket.PREFIX + Rocket.uniqueID;
+		Rocket.uniqueID = super.incrementUniqueID(Rocket.uniqueID);		// Increment Rocket class' uniqueID for the next Rocket object
 	}
 	
 	/**
@@ -42,13 +51,13 @@ public class Rocket extends Shape {
 	 * @param height Height of the Rocket object
 	 * @param width Width of the Rocket object
 	 */
-	public Rocket(int x, int y, Path path, Animation animation, int height, int width) {
+	public Rocket(int shapeID, int x, int y, Path path, Animation animation, int height, int width) {
 		super(x, y);
 		this.setPath(path);
 		this.setAnimation(animation);
 		this.height = height;
 		this.width = width;
-		this.shapeID = Rocket.ID;
+		this.shapeID = shapeID;
 	}
 	
 	public String toString() {
@@ -60,7 +69,7 @@ public class Rocket extends Shape {
 	
 	public void update() {
 		this.animation.advance();
-		checkReverse();	// This is how I am testing reverse direction for a shape right now, definitely going to restructure this
+		//checkReverse();	// This is how I am testing reverse direction for a shape right now, definitely going to restructure this
 		int[] nextPoint;
 		if (!reverse) 
 			nextPoint = this.path.advance();
@@ -93,7 +102,7 @@ public class Rocket extends Shape {
 	}
 	
 	public Rocket getWrapCompanion() {
-		System.out.println("Spawning wrap companion for shape " + this.shapeID + "  at: " + path.getStartX() + ", " + path.getStartY());
+		System.out.println("Spawning wrap companion for shape " + String.format("0x%08X", this.shapeID) + "  at: " + path.getStartX() + ", " + path.getStartY());
 		
 		int[] start = {path.getStartX(), path.getStartY()};
 		int[] spawn = {path.getSpawnX(), path.getSpawnY()};
@@ -104,7 +113,18 @@ public class Rocket extends Shape {
 		
 		Animation wrapAnimation = new Animation(animation.getDelay(), animation.getSprites(), animation.getTimer());
 		
-		return new Rocket(path.getStartX(), path.getStartY(), wrapPath, wrapAnimation, height, width);
+		return new Rocket(this.shapeID, path.getStartX(), path.getStartY(), wrapPath, wrapAnimation, height, width);
+	}
+	
+	/**
+	 * Returns true if the provided ID is within the range of IDs dedicated to Rocket objects.
+	 * @param id Shape ID to test
+	 * @return true if id is a Rocket's ID, else false
+	 */
+	public static boolean inIDRange(int id) {
+		if (id >= 0x00100000 && id <= 0x001FFFFF)
+			return true;
+		return false;
 	}
 
 	public int getX() {
@@ -147,11 +167,11 @@ public class Rocket extends Shape {
 		return false;
 	}
 
-	public String getShapeID() {
+	public int getShapeID() {
 		return this.shapeID;
 	}
 
-	public void setShapeID(String shapeID) {
+	public void setShapeID(int shapeID) {
 		this.shapeID = shapeID;
 	}
 	

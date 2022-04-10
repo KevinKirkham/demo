@@ -41,7 +41,7 @@ public class Buttons extends JPanel {
 		play.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent event) {
 				// button action goes here 
-				Model.t.start();
+				Driver.paused = false;
 			}
 		});
 		return play;
@@ -51,7 +51,7 @@ public class Buttons extends JPanel {
 		JButton pause = new JButton("Pause");
 		pause.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				Model.t.stop();
+				Driver.paused = true;
 			}
 		});
 		return pause;

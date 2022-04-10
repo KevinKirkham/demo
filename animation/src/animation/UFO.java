@@ -4,26 +4,52 @@ import java.awt.Graphics2D;
 
 public class UFO extends Shape {
 	
-	public static String ID = "UFO";
-	private String shapeID;
+	/**
+	 * Prefix unique to UFO objects, first 12 bits of a Bird's shape ID. This does not change among UFO objects.
+	 */
+	public static final int PREFIX = 0x00300000;
 	
+	/**
+	 * Last 20 bits of a UFO's shape ID, unique to each instantiation of a UFO. Gets incremented by one with each new 
+	 * UFO object created.
+	 */
+	public static int uniqueID = 0x00000000;
+	
+	/**
+	 * Constructor to be used when created a UFO from scratch as opposed to an existing UFO's wrap companion.
+	 * @param x The X-coordinate of the UFO's initial spawn point
+	 * @param y The Y-coordinate of the UFO's initial spawn point
+	 * @param deltaX The delta X value of the UFO
+	 * @param deltaY The delta Y value of the UFO
+	 */
 	public UFO(int x, int y, int deltaX, int deltaY) {
 		super(x, y);
 		this.height = 100;
 		this.width = 100;
 		this.path = new Path(x, y, deltaX, deltaY, height, width);
 		this.animation = new Animation(150, 6, "/UFO_sprite_sheet.png", this.height, this.width);
-		this.shapeID = UFO.ID;
+		this.shapeID = UFO.PREFIX + UFO.uniqueID;
+		UFO.uniqueID = super.incrementUniqueID(UFO.uniqueID);		// Increment UFO class' uniqueID for the next UFO object
 	}
 	
-	public UFO(int x, int y, Path path, Animation animation, int height, int width) {
+	/**
+	 * The constructor that is to be used when creating a wrap companion UFO for an existing UFO.
+	 * @param shapeID The existing UFO's shapeID
+	 * @param x	the X-coordinate at which the wrap companion is to spawn
+	 * @param y the Y-coordinate at which the wrap companion is to spawn
+	 * @param path The Path object of the existing UFO
+	 * @param animation	The Animation of the existing UFO
+	 * @param height The height of the existing UFO
+	 * @param width	The width of the existing UFO
+	 */
+	public UFO(int shapeID, int x, int y, Path path, Animation animation, int height, int width) {
 		super(x, y);
 		this.setPath(path);
 		//this.path.calibrateCounter();
 		this.setAnimation(animation);
 		this.height = height;
 		this.width = width;
-		this.shapeID = UFO.ID;
+		this.shapeID = shapeID;
 	}
 	
 	public String toString() {
@@ -31,11 +57,6 @@ public class UFO extends Shape {
 		+ " | Left Int.: " + this.path.getLeftIntercept() + " | Right Int.: " + this.path.getRightIntercept()
 		+ " | Spawn: (" + this.getSpawnX() + ", " + this.getSpawnY() + ") | Del: (" + this.getDelX()
 		+ ", " + this.getDelY() + ") | Start: (" + this.getStartX() + ", " + this.getStartY() + ")";
-	}
-	
-	public void incrementID() {
-		int id = Integer.parseInt(UFO.ID.substring(3));
-		UFO.ID = "UFO-" + ++id;
 	}
 	
 	public void update() {
@@ -50,7 +71,7 @@ public class UFO extends Shape {
 	}
 	
 	public UFO getWrapCompanion() {
-		System.out.println("Spawning wrap companion for shape " + this.shapeID + "  at: " + path.getStartX() + ", " + path.getStartY());
+		System.out.println("Spawning wrap companion for shape " + String.format("0x%08X", this.shapeID) + "  at: " + path.getStartX() + ", " + path.getStartY());
 		
 		int[] start = {path.getStartX(), path.getStartY()};
 		int[] spawn = {path.getSpawnX(), path.getSpawnY()};
@@ -65,7 +86,18 @@ public class UFO extends Shape {
 		
 		Animation wrapAnimation = new Animation(animation.getDelay(), animation.getSprites(), animation.getTimer());
 		
-		return new UFO(start[0], start[1], wrapPath, wrapAnimation, height, width);
+		return new UFO(this.shapeID, start[0], start[1], wrapPath, wrapAnimation, height, width);
+	}
+	
+	/**
+	 * Returns true if the provided ID is within the range of IDs dedicated to UFO objects.
+	 * @param id Shape ID to test
+	 * @return true if id is a UFO's ID, else false
+	 */
+	public static boolean inIDRange(int id) {
+		if (id >= 0x00300000 && id <= 0x003FFFFF)
+			return true;
+		return false;
 	}
 
 	public int getX() {
@@ -108,11 +140,11 @@ public class UFO extends Shape {
 		return false;
 	}
 
-	public String getShapeID() {
+	public int getShapeID() {
 		return this.shapeID;
 	}
 
-	public void setShapeID(String shapeID) {
+	public void setShapeID(int shapeID) {
 		this.shapeID = shapeID;
 	}
 	

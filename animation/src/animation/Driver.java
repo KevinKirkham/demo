@@ -4,7 +4,7 @@ public class Driver {
 
 	static Model model;
 	static BorderView currentView;
-	static int updatesPerSecond = 60;
+	static int updatesPerSecond = 150;
 	static boolean paused = true;
 	
 	public static void main(String[] args) {
@@ -75,7 +75,7 @@ public class Driver {
 				sinceLast -= nsBetweenUpdates;
 			}
 			
-			// Check to see if one second has passed to print the updates per minute
+			// If more than one second has passed, print status report for that second
 			if (System.currentTimeMillis() - updateTimer > 1000) {
 				updateTimer += 1000;
 				System.out.println("Updates: " + updates);
