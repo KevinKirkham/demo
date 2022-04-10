@@ -1,0 +1,18 @@
+Plans
+
+	The next thing that I want to implement is a way to have shapes reverse their direction using the Path object that they already have - no new arrays
+	of points! I want to use the existing data of the Path and strategically manipulate the point counter and spawn points to make the shape go backwards.
+	
+	And I want to add a kind of utilities panel into the JFrame, to the side of the animation panel which has a section in it for information about each 
+	shape that is being displayed. It should populate when a new shape gets added to the animation panel and depopulate when a shape is removed. The kind
+	of information I want to see about each shape is stuff like the shape's current location and other relevant stuff. Maybe we can make a speed slider
+	that only affects individual shapes rather than all of them. Also, I want a checkbox for reversing the direction a shape is moving in. And somewhere
+	we should include a FPS counter, perhaps in the utilities panel or maybe in the corner of the screen. 
+
+Known Bugs
+
+	Two of the same shape on the screen causes an issue when one of them tries to wrap, it causes an Index out of bounds exception by trying to pull the 
+	value at points.length in the points array for the shape that wraps. That same shape is fine though when it's the only one of its kind on the screen.
+	
+	At certain angles, shapes don't wrap, they just fly off the screen. We need to figure out which angles cause problems and make sure we are spawning
+	wrap companions at the right locations

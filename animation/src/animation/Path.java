@@ -48,6 +48,16 @@ public class Path {
 	private int[][] points;
 	
 	/**
+	 * Starting point for the section of the path that will be traversed in reverse
+	 */
+	private int[] revPathStart = new int[2];
+	
+	/**
+	 * Ending point for the section of the path that will be traversed in reverse
+	 */
+	private int[] revPathEnd = new int[2];
+	
+	/**
 	 * A counter variable that indicates the exact element in the points array that holds that coordinates that the shape is to be printed at.
 	 */
 	private int pointCounter;
@@ -82,14 +92,14 @@ public class Path {
 
 		calibrateCounter();
 		
+		setReversePoints();
+		
 		// debugging, can be removed
-		printPath();
+		//printPath();
 	}
 	
 	/**
 	 * To be used for the "passing-on" of a path object to a shape's wrap companion shape.
-	 * @param x
-	 * @param y
 	 * @param deltaX
 	 * @param deltaY
 	 * @param slope
@@ -102,10 +112,9 @@ public class Path {
 	 * @param shapeHeight
 	 * @param shapeWidth
 	 */
-	public Path(int x, int y, int deltaX, int deltaY, double slope, int[] start, int[] spawn, 
+	public Path(int deltaX, int deltaY, double slope, int[] start, int[] spawn, 
 			int[] end, int[][] points, double leftIntercept, double rightIntercept, int shapeHeight, int shapeWidth) {
-		this.x = x;
-		this.y = y;
+		
 		this.deltaX = deltaX;
 		this.deltaY = deltaY;
 		this.slope = slope;
@@ -113,11 +122,15 @@ public class Path {
 		this.spawn = spawn;
 		this.end = end;
 		this.points = points;
+		this.x = start[0];
+		this.y = start[1];
 		this.leftIntercept = leftIntercept;
 		this.rightIntercept = rightIntercept;
 		this.shapeHeight = shapeHeight;
 		this.shapeWidth = shapeWidth;
 		this.pointCounter = 0;
+		
+		//printPath();	// debugging
 	}
 	
 	/**
@@ -145,6 +158,19 @@ public class Path {
 	}
 	
 	/**
+	 * Sets the current active point of this Path object to the row in the points[][] array indicated by the
+	 * pointCounter variable but traverses the points[][] array in reverse instead of forward.
+	 * @return this path's active point
+	 */
+	public int[] reverse() {
+		int[] currentPoint = new int[2];
+		currentPoint[0] = points[pointCounter][0];
+		currentPoint[1] = points[pointCounter][1];
+		this.pointCounter--;
+		return currentPoint;
+	}
+	
+	/**
 	 * Sets the point counter equal to the path's currently active point. Used for when a shape (wrap companion)
 	 * receives a Path object from another shape but is to be displayed at a different location than the inherited 
 	 * path's active point.
@@ -161,14 +187,20 @@ public class Path {
 				this.pointCounter = i;
 			
 		
-		// This could be an alternative but I noticed a problem when the deltaX of the shape was set to negative
-		// Shape snaps to a different location than it should. Maybe make sure the starting point is getting calculated correctly?
-		/*
-		if (this.points[points.length - 1][0] == BorderView.ANIMATION_WIDTH)
-			this.pointCounter = this.points.length - (BorderView.ANIMATION_WIDTH - this.x);
-		else 
-			this.pointCounter = this.points.length - (BorderView.ANIMATION_HEIGHT - this.y);
-		*/
+		// This seems to be a working alternative but isn't very tidy
+		// Doesn't work when you put a shape at (350, 350) with deltaX = -1 and deltaY = 6
+//		if (deltaX > 0) {
+//			if (this.points[points.length - 1][0] == BorderView.ANIMATION_WIDTH)
+//				this.pointCounter = this.points.length - (BorderView.ANIMATION_WIDTH - this.x);
+//			else 
+//				this.pointCounter = this.points.length - (BorderView.ANIMATION_HEIGHT - this.y);	
+//		}
+//		else {
+//			if (this.points[points.length - 1][0] == BorderView.ANIMATION_WIDTH)
+//				this.pointCounter = BorderView.ANIMATION_WIDTH - this.x;
+//			else 
+//				this.pointCounter = BorderView.ANIMATION_HEIGHT - this.y;
+//		}
 	}
 	
 	/**
@@ -181,6 +213,8 @@ public class Path {
 			System.out.println(i + ": " + points[i][0] + " " + points[i][1]);
 		
 		System.out.println("Counter: " + this.pointCounter);
+		System.out.println("revPathStart: (" + this.revPathStart[0] + ", " + this.revPathStart[1] + ")");
+		System.out.println("revPathEnd: (" + this.revPathEnd[0] + ", " + this.revPathEnd[1] + ")");
 	}
 	
 	/**
@@ -256,7 +290,6 @@ public class Path {
 			
 			// Starting from left, fix the X, calculate the Y
 			else if (leftIntercept > -this.shapeHeight / 2 && leftIntercept < BorderView.ANIMATION_HEIGHT - (this.shapeHeight / 2)) {
-				System.out.println("debug");
 				this.start[0] = -this.shapeWidth;
 				this.start[1] = (int) Math.round((slope * start[0]) + leftIntercept);	// y = mx + b
 			}
@@ -360,6 +393,21 @@ public class Path {
 		}
 	}
 	
+	private void setReversePoints() {
+		// Get the point just before the spawn point and assign it revPathStart
+		int i = this.points.length - 1;
+		for (; i > 0; i--) {
+			if (this.points[i][0] == this.spawn[0] && this.points[i][1] == this.spawn[1]) {
+				this.revPathStart[0] = this.points[--i][0];
+				this.revPathStart[1] = this.points[i][1];
+			}
+		}
+		
+		// Get the point that is 200 points back from the end of the points list to be the ending point for the reverse section
+		this.revPathEnd[0] = this.points[200][0];
+		this.revPathEnd[1] = this.points[200][1];
+	}
+	
 	/**
 	 * Returns a 2D array of the approximated points that are closest to the path described by drawing a line 
 	 * between the coordinates for two points provided (x1, y1, x2, y2). 
@@ -417,7 +465,7 @@ public class Path {
 		}
 		return points;
 	}
-
+	
 	public int getX() {
 		return x;
 	}
@@ -520,6 +568,30 @@ public class Path {
 	
 	public int getEndY() {
 		return this.end[1];
+	}
+
+	public int getPointCounter() {
+		return pointCounter;
+	}
+
+	public void setPointCounter(int pointCounter) {
+		this.pointCounter = pointCounter;
+	}
+
+	public int[] getRevPathStart() {
+		return revPathStart;
+	}
+
+	public void setRevPathStart(int[] revPathStart) {
+		this.revPathStart = revPathStart;
+	}
+
+	public int[] getRevPathEnd() {
+		return revPathEnd;
+	}
+
+	public void setRevPathEnd(int[] revPathEnd) {
+		this.revPathEnd = revPathEnd;
 	}
 	
 }

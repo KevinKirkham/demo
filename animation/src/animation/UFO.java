@@ -12,14 +12,14 @@ public class UFO extends Shape {
 		this.height = 100;
 		this.width = 100;
 		this.path = new Path(x, y, deltaX, deltaY, height, width);
-		this.animation = new Animation(100, 6, "/UFO_sprite_sheet.png", this.height, this.width);
+		this.animation = new Animation(150, 6, "/UFO_sprite_sheet.png", this.height, this.width);
 		this.shapeID = UFO.ID;
 	}
 	
 	public UFO(int x, int y, Path path, Animation animation, int height, int width) {
 		super(x, y);
 		this.setPath(path);
-		this.path.calibrateCounter();
+		//this.path.calibrateCounter();
 		this.setAnimation(animation);
 		this.height = height;
 		this.width = width;
@@ -27,7 +27,7 @@ public class UFO extends Shape {
 	}
 	
 	public String toString() {
-		return "X: " + this.x + " | Y: " + this.y + " | Slope: " + this.path.getSlope() 
+		return "X: " + this.x + " | Y: " + this.y + " | Point: " + path.getPointCounter() + " | Slope: " + this.path.getSlope() 
 		+ " | Left Int.: " + this.path.getLeftIntercept() + " | Right Int.: " + this.path.getRightIntercept()
 		+ " | Spawn: (" + this.getSpawnX() + ", " + this.getSpawnY() + ") | Del: (" + this.getDelX()
 		+ ", " + this.getDelY() + ") | Start: (" + this.getStartX() + ", " + this.getStartY() + ")";
@@ -39,6 +39,7 @@ public class UFO extends Shape {
 	}
 	
 	public void update() {
+		this.animation.advance();
 		int[] nextPoint = this.path.advance();
 		this.x = nextPoint[0];
 		this.y = nextPoint[1];
@@ -55,11 +56,16 @@ public class UFO extends Shape {
 		int[] spawn = {path.getSpawnX(), path.getSpawnY()};
 		int[] end = {path.getEndX(), path.getEndY()};
 		
-		Path wrapPath = new Path(path.getStartX(), path.getStartY(), path.getDeltaX(), path.getDeltaY(), path.getSlope(), start, spawn,
-				end, path.getPoints(), path.getLeftIntercept(), path.getRightIntercept(), height, width);
-		Animation wrapAnimation = new Animation(animation.getDelay(), animation.getSprites());
+//		Path wrapPath = new Path(path.getStartX(), path.getStartY(), path.getDeltaX(), path.getDeltaY(), path.getSlope(), start, spawn,
+//				end, path.getPoints(), path.getLeftIntercept(), path.getRightIntercept(), height, width);
 		
-		return new UFO(path.getStartX(), path.getStartY(), wrapPath, wrapAnimation, height, width);
+		//Path(int x, int y, int deltaX, int deltaY, double slope, int[] start, int[] spawn, int[] end, int[][] points, double leftIntercept, double rightIntercept, int shapeHeight, int shapeWidth)
+		Path wrapPath = new Path(path.getDeltaX(), path.getDeltaY(), path.getSlope(), start, spawn, end,
+				path.getPoints(), path.getLeftIntercept(), path.getRightIntercept(), path.getShapeHeight(), path.getShapeWidth());
+		
+		Animation wrapAnimation = new Animation(animation.getDelay(), animation.getSprites(), animation.getTimer());
+		
+		return new UFO(start[0], start[1], wrapPath, wrapAnimation, height, width);
 	}
 
 	public int getX() {

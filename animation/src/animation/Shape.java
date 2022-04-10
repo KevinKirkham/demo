@@ -1,6 +1,6 @@
 package animation;
 
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 
 public abstract class Shape {
 	
@@ -43,7 +43,7 @@ public abstract class Shape {
 	 * Renders the shape on the animation window.
 	 * @param g Graphics object of the component in which the shape is to be drawn.
 	 */
-	protected void render(Graphics2D g) {
+	protected void render(Graphics g) {
 		g.drawImage(this.animation.getSprites()[this.animation.getSpriteCounter()], x, y, null);
 	}
 	

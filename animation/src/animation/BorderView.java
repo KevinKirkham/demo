@@ -1,11 +1,9 @@
 package animation;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -29,6 +27,7 @@ public class BorderView {
 	}
 	
 	private void init() {
+		frame.setVisible(true);
 		frame.setLayout(new BorderLayout());
 		frame.setResizable(RESIZABLE);
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
@@ -40,10 +39,8 @@ public class BorderView {
 		frame.add(buttons, BorderLayout.NORTH);
 		frame.add(animation, BorderLayout.CENTER);
 		frame.add(checkBoxes, BorderLayout.SOUTH);
-
-		frame.pack();
 		
-		frame.setVisible(true);
+		frame.pack();
 	}
 	
 	private JPanel createButtonsPanel() {
@@ -78,8 +75,8 @@ public class BorderView {
 	
 	private AnimationPanel createAnimationPanel() {
 		AnimationPanel animation = new AnimationPanel();
-		animation.setPreferredSize(new Dimension(500, 500));
-		animation.setBackground(Color.BLACK);
+		animation.setPreferredSize(new Dimension(ANIMATION_HEIGHT, ANIMATION_WIDTH));
+		//animation.setBackground(Color.BLACK);
 		animation.setDoubleBuffered(true);
 		return animation;
 	}
@@ -88,8 +85,7 @@ public class BorderView {
 		JButton play = new JButton("Play");
 		play.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent event) {
-				// button action goes here 
-				Model.t.start();
+				Driver.paused = false;
 			}
 		});
 		return play;
@@ -99,7 +95,7 @@ public class BorderView {
 		JButton pause = new JButton("Pause");
 		pause.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				Model.t.stop();
+				Driver.paused = true;
 			}
 		});
 		return pause;
@@ -161,7 +157,6 @@ public class BorderView {
 						}
 					}
 				}
-				
 			}
 		});
 		return ufo;

@@ -1,13 +1,9 @@
 package animation;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-
 import javax.imageio.ImageIO;
-import javax.swing.Timer;
 
 /**
  * This class contains all data and behaviors pertaining to an animation that a shape can have. It 
@@ -18,15 +14,14 @@ import javax.swing.Timer;
 public class Animation {
 	
 	/**
-	 * The timer object that controls the speed at which the animation changes frames.
+	 * Acts as a record of the last time an advancement in the animation happened.
 	 */
-	private Timer timer;
+	private long timer;
 	
 	/**
-	 * How long the timer should wait before advancing. This is used as a way to meter 
-	 * for how long each frame of the animation is displayed. 
+	 * The number of milliseconds to wait before advancing displaying the next sprite in the animation.
 	 */
-	public int delay;
+	private int delay;
 	
 	/**
 	 * The URL object that links to the spritesheet.
@@ -39,7 +34,7 @@ public class Animation {
 	private int height, width;
 	
 	/**
-	 * Sprites used in the animation.
+	 * Array of sprites used in the animation.
 	 */
 	private BufferedImage[] sprites;
 	
@@ -66,9 +61,9 @@ public class Animation {
 		this.url = this.getClass().getResource(spriteSheet);
 		this.height = height;
 		this.width = width;
+		this.timer = System.currentTimeMillis();
 		
 		loadSprites();	// Load the sprites found at the URL into the sprites array
-		setTimer();		// Establish and start the timer
 	}
 	
 	/**
@@ -78,11 +73,10 @@ public class Animation {
 	 * @param delay Duration of time that each frame is displayed for. 
 	 * @param sprites Sprites involved in the animation.
 	 */
-	public Animation(int delay, BufferedImage[] sprites) {
+	public Animation(int delay, BufferedImage[] sprites, long timer) {
 		this.delay = delay;
 		this.sprites = sprites;
-		
-		setTimer();		// Start the timer 
+		this.timer = timer;
 	}
 	
 	/**
@@ -100,15 +94,23 @@ public class Animation {
 	}
 	
 	/**
-	 * Establishes and begins the timer that determines the speed at which the animation will advance.
+	 * If the delay for the Shape has passed then we can advance the sprite counter by one to
+	 * display the next sprite. Each Shape can be configured to have it's own delay - some animations
+	 * may look nicer at different speeds.
+	 * 
+	 * The variable timer indicates the time at which a frame update last occurred. The timer is set to
+	 * now after the sprite counter is incremented so that even if the interval between now and the 
+	 * last time a frame advancement occurred is several times larger than the delay, only one frame
+	 * advancement happens rather than as many frame advancements can fit in that large time interval.
+	 * Such a situation could occur when the last update value stays stagnant but current time keeps
+	 * advancing, like when the user pauses the program.
 	 */
-	void setTimer() {
-		this.timer = new Timer(delay, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				incrementSpriteCounter();
-			}
-		});
-		this.timer.start();
+	public void advance() {
+		long now = System.currentTimeMillis();
+		if (now - this.timer > this.delay) {
+			incrementSpriteCounter();
+			this.timer = now;
+		}
 	}
 
 	/**
@@ -119,14 +121,6 @@ public class Animation {
 		if (this.spriteCounter == this.sprites.length - 1)
 			this.spriteCounter = 0;
 		else spriteCounter++;
-	}
-	
-	public int getDelay() {
-		return this.delay;
-	}
-
-	public void setDelay(int delay) {
-		this.delay = delay;
 	}
 
 	public BufferedImage[] getSprites() {
@@ -143,6 +137,22 @@ public class Animation {
 
 	public void setSpriteCounter(int spriteCounter) {
 		this.spriteCounter = spriteCounter;
+	}
+
+	public long getTimer() {
+		return timer;
+	}
+
+	public void setTimer(long spriteTimer) {
+		this.timer = spriteTimer;
+	}
+
+	public int getDelay() {
+		return delay;
+	}
+
+	public void setDelay(int delay) {
+		this.delay = delay;
 	}
 	
 }

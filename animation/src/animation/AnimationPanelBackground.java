@@ -1,5 +1,6 @@
 package animation;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -7,12 +8,11 @@ import java.io.IOException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class AnimationPanelBackground extends JPanel {
 
-	Image background;
+	Image bgImage;
 	
 	public AnimationPanelBackground() {
 		init();
@@ -20,22 +20,23 @@ public class AnimationPanelBackground extends JPanel {
 	
 	public void init() {
 		setPreferredSize(new Dimension(500, 500));
+		setLayout(new BorderLayout());
+		setVisible(true);
 		setBackground();
 	}
 	
 	public void setBackground() {
 		URL url = this.getClass().getResource("/space.png");
 		try {
-			this.background = ImageIO.read(url);
-			
+			this.bgImage = ImageIO.read(url);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public void paintComponent(Graphics g) {
-		g.drawRect(0, 0, 10, 10);
-		g.drawImage(this.background, 0, 0, null);
+		super.paintComponent(g);
+		g.drawImage(this.bgImage, 0, 0, null);
 	}
 	
 	
@@ -49,5 +50,5 @@ public class AnimationPanelBackground extends JPanel {
 //		frame.add(bg);
 //		frame.pack();
 //	}
-	
+//	
 }
