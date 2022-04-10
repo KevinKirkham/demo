@@ -3,11 +3,17 @@ Plans
 	The next thing that I want to implement is a way to have shapes reverse their direction using the Path object that they already have - no new arrays
 	of points! I want to use the existing data of the Path and strategically manipulate the point counter and spawn points to make the shape go backwards.
 	
-	And I want to add a kind of utilities panel into the JFrame, to the side of the animation panel which has a section in it for information about each 
-	shape that is being displayed. It should populate when a new shape gets added to the animation panel and depopulate when a shape is removed. The kind
-	of information I want to see about each shape is stuff like the shape's current location and other relevant stuff. Maybe we can make a speed slider
-	that only affects individual shapes rather than all of them. Also, I want a checkbox for reversing the direction a shape is moving in. And somewhere
-	we should include a FPS counter, perhaps in the utilities panel or maybe in the corner of the screen. 
+	And I want to add a kind of utilities panel into the JFrame, to the side of the animation panel which has a section in it for
+	information about each shape that is being displayed. It should populate when a new shape gets added to the animation panel
+	and depopulate when a shape is removed. The kind of information I want to see about each shape is stuff like the shape's
+	current location and other relevant stuff. Maybe we can make a speed slider that only affects individual shapes rather than
+	all of them. Also, I want a checkbox for reversing the direction a shape is moving in. And somewhere we should include a FPS
+	counter, perhaps in the utilities panel or maybe in the corner of the screen. A way to freeze a single shape would be cool 
+	too, that could be done by stopping the pointCounter from incrementing or decrementing so as not to stop the animation from 
+	playing. The layout of this utilities panel would likely be a BoxLayout so the panels for each shape would stack on top of
+	each other on the sideof the animation panel. Putting them inside of a scrollable panel would be great, and maybe including
+	a way to filter the panels that appear there would be a good idea too, for when there are a lot of shapes on the screen. A
+	search bar may be a good idea.
 
 Known Bugs
 
