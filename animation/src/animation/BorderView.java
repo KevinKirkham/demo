@@ -18,18 +18,28 @@ public class BorderView {
 	public AnimationPanel animation;
 	JPanel checkBoxes;
 	
-	public final static int ANIMATION_HEIGHT = 500;
+	/**
+	 * Width of the animation panel for this view.
+	 */
 	public final static int ANIMATION_WIDTH = 500;
-	public final static boolean RESIZABLE = true;
+	
+	/**
+	 * Height of the animation panel for this view.
+	 */
+	public final static int ANIMATION_HEIGHT = 500;
 	
 	public BorderView() {
 		init();
 	}
 	
 	private void init() {
+//		frame.setMaximumSize(new Dimension(ANIMATION_WIDTH, ANIMATION_HEIGHT));
+//		frame.setMinimumSize(new Dimension(ANIMATION_WIDTH, ANIMATION_HEIGHT));
+//		frame.setPreferredSize(new Dimension(ANIMATION_WIDTH, ANIMATION_HEIGHT));
+		
 		frame.setVisible(true);
 		frame.setLayout(new BorderLayout());
-		frame.setResizable(RESIZABLE);
+		frame.setResizable(true);
 		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 		
 		this.buttons = createButtonsPanel();
@@ -75,7 +85,7 @@ public class BorderView {
 	
 	private AnimationPanel createAnimationPanel() {
 		AnimationPanel animation = new AnimationPanel();
-		animation.setPreferredSize(new Dimension(ANIMATION_HEIGHT, ANIMATION_WIDTH));
+		animation.setPreferredSize(new Dimension(ANIMATION_WIDTH, ANIMATION_HEIGHT));
 		//animation.setBackground(Color.BLACK);
 		animation.setDoubleBuffered(true);
 		return animation;
@@ -131,7 +141,7 @@ public class BorderView {
 				}
 				else {
 					for (int i = 0; i < Model.shapes.size(); i++) {
-						if (Model.shapes.get(i).getShapeID().equals("ROC")) {
+						if (Rocket.inIDRange(Model.shapes.get(i).getShapeID())) {
 							Model.shapes.remove(Model.shapes.get(i));
 							i--;
 						}
@@ -151,7 +161,7 @@ public class BorderView {
 				}
 				else {
 					for (int i = 0; i < Model.shapes.size(); i++) {
-						if (Model.shapes.get(i).getShapeID().equals("UFO")) {
+						if (UFO.inIDRange(Model.shapes.get(i).getShapeID())) {
 							Model.shapes.remove(Model.shapes.get(i));
 							i--;
 						}
@@ -171,7 +181,7 @@ public class BorderView {
 				}
 				else {
 					for (int i = 0; i < Model.shapes.size(); i++) {
-						if (Model.shapes.get(i).getShapeID().equals("BRD")) {
+						if (Bird.inIDRange(Model.shapes.get(i).getShapeID())) {
 							Model.shapes.remove(Model.shapes.get(i));
 							i--;
 						}

@@ -24,9 +24,9 @@ public class UFO extends Shape {
 	 */
 	public UFO(int x, int y, int deltaX, int deltaY) {
 		super(x, y);
-		this.height = 100;
+		this.height = 70;
 		this.width = 100;
-		this.path = new Path(x, y, deltaX, deltaY, height, width);
+		this.path = new Path(20, x, y, deltaX, deltaY, height, width);
 		this.animation = new Animation(150, 6, "/UFO_sprite_sheet.png", this.height, this.width);
 		this.shapeID = UFO.PREFIX + UFO.uniqueID;
 		UFO.uniqueID = super.incrementUniqueID(UFO.uniqueID);		// Increment UFO class' uniqueID for the next UFO object
@@ -81,10 +81,12 @@ public class UFO extends Shape {
 //				end, path.getPoints(), path.getLeftIntercept(), path.getRightIntercept(), height, width);
 		
 		//Path(int x, int y, int deltaX, int deltaY, double slope, int[] start, int[] spawn, int[] end, int[][] points, double leftIntercept, double rightIntercept, int shapeHeight, int shapeWidth)
-		Path wrapPath = new Path(path.getDeltaX(), path.getDeltaY(), path.getSlope(), start, spawn, end,
-				path.getPoints(), path.getLeftIntercept(), path.getRightIntercept(), path.getShapeHeight(), path.getShapeWidth());
+		Path wrapPath = new Path(path.getDelay(), path.getTimer(), getDeltaX(), path.getDeltaY(), path.getSlope(), start, spawn, end,
+				path.getPoints(), path.getLeftIntercept(), path.getRightIntercept(), path.getShapeHeight(), path.getShapeWidth(), path.isReverse());
 		
 		Animation wrapAnimation = new Animation(animation.getDelay(), animation.getSprites(), animation.getTimer());
+		
+		this.setWrapped(true);
 		
 		return new UFO(this.shapeID, start[0], start[1], wrapPath, wrapAnimation, height, width);
 	}

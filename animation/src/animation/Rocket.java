@@ -20,7 +20,8 @@ public class Rocket extends Shape {
 	 */
 	private static int uniqueID = 0x00000000;
 	
-	private boolean reverse = false;
+	private long timer;
+	private int delay;
 	
 	/**
 	 * Called when creating a Rocket from scratch as opposed to being called by an existing Rocket object.
@@ -34,7 +35,7 @@ public class Rocket extends Shape {
 		super(x, y);
 		this.height = 100;
 		this.width = 100;
-		this.path = new Path(x, y, deltaX, deltaY, height, width);
+		this.path = new Path(50, x, y, deltaX, deltaY, height, width);
 		this.animation = new Animation(150, 4, "/rocket_sprite_sheet.png", this.height, this.width);
 		this.shapeID = Rocket.PREFIX + Rocket.uniqueID;
 		Rocket.uniqueID = super.incrementUniqueID(Rocket.uniqueID);		// Increment Rocket class' uniqueID for the next Rocket object
@@ -58,6 +59,7 @@ public class Rocket extends Shape {
 		this.height = height;
 		this.width = width;
 		this.shapeID = shapeID;
+		
 	}
 	
 	public String toString() {
@@ -69,33 +71,26 @@ public class Rocket extends Shape {
 	
 	public void update() {
 		this.animation.advance();
-		//checkReverse();	// This is how I am testing reverse direction for a shape right now, definitely going to restructure this
-		int[] nextPoint;
-		if (!reverse) 
-			nextPoint = this.path.advance();
-		else 
-			nextPoint = this.path.reverse();
-		
+		int[] nextPoint = this.path.advance();
 		this.x = nextPoint[0];
 		this.y = nextPoint[1];
-		return;
 	}
 	
-	private void checkReverse() {
-		
-		// If we are in reverse and the next point to be made the current point is the end of the reverse section then negate reverse
-		if (reverse) {
-			if (this.path.getPoints()[this.path.getPointCounter() - 1][0] == this.path.getRevPathEnd()[0] && 
-			this.path.getPoints()[this.path.getPointCounter() - 1][1] == this.path.getRevPathEnd()[1])
-				this.reverse = !this.reverse;
-		}
-		
-		// If we aren't in reverse and the next point to be made the current point is the start of the reverse section then negate the reverse
-		else 
-			if (this.path.getPoints()[this.path.getPointCounter() + 1][0] == this.path.getRevPathStart()[0] && 
-			this.path.getPoints()[this.path.getPointCounter() + 1][1] == this.path.getRevPathStart()[1])
-				this.reverse = !this.reverse;
-	}
+//	private void checkReverse() {
+//		
+//		// If we are in reverse and the next point to be made the current point is the end of the reverse section then negate reverse
+//		if (reverse) {
+//			if (this.path.getPoints()[this.path.getPointCounter() - 1][0] == this.path.getRevPathEnd()[0] && 
+//			this.path.getPoints()[this.path.getPointCounter() - 1][1] == this.path.getRevPathEnd()[1])
+//				this.reverse = !this.reverse;
+//		}
+//		
+//		// If we aren't in reverse and the next point to be made the current point is the start of the reverse section then negate the reverse
+//		else 
+//			if (this.path.getPoints()[this.path.getPointCounter() + 1][0] == this.path.getRevPathStart()[0] && 
+//			this.path.getPoints()[this.path.getPointCounter() + 1][1] == this.path.getRevPathStart()[1])
+//				this.reverse = !this.reverse;
+//	}
 	
 	public void render(Graphics2D g) {
 		super.render(g);
@@ -108,10 +103,12 @@ public class Rocket extends Shape {
 		int[] spawn = {path.getSpawnX(), path.getSpawnY()};
 		int[] end = {path.getEndX(), path.getEndY()};
 		
-		Path wrapPath = new Path(path.getDeltaX(), path.getDeltaY(), path.getSlope(), start, spawn,
-				end, path.getPoints(), path.getLeftIntercept(), path.getRightIntercept(), height, width);
+		Path wrapPath = new Path(path.getDelay(), path.getTimer(), path.getDeltaX(), path.getDeltaY(), path.getSlope(), start, spawn,
+				end, path.getPoints(), path.getLeftIntercept(), path.getRightIntercept(), height, width, path.isReverse());
 		
 		Animation wrapAnimation = new Animation(animation.getDelay(), animation.getSprites(), animation.getTimer());
+		
+		this.setWrapped(true);
 		
 		return new Rocket(this.shapeID, path.getStartX(), path.getStartY(), wrapPath, wrapAnimation, height, width);
 	}

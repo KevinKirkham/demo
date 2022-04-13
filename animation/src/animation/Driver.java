@@ -4,7 +4,7 @@ public class Driver {
 
 	static Model model;
 	static BorderView currentView;
-	static int updatesPerSecond = 150;
+	static int updatesPerSecond = 60;
 	static boolean paused = true;
 	
 	public static void main(String[] args) {
@@ -19,9 +19,12 @@ public class Driver {
 		Shape ufo = new UFO(200, 350, 2, 3 );
 		Shape rocket = new Rocket(150, 339, 2, -1);
 		
-		Driver.model.addShape(bird);
+ 		//Driver.model.addShape(bird);
 		Driver.model.addShape(ufo);
-		Driver.model.addShape(rocket);
+		//Driver.model.addShape(rocket);
+		
+		ufo.setAnimationDelay(90);
+		ufo.setPathDelay(10);
 		
 		driver.run();
 	}

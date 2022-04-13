@@ -45,6 +45,11 @@ public abstract class Shape {
 	 */
 	protected int shapeID;
 	
+	/**
+	 * Indicates if this shape has spawned a wrap companion for itself or not.
+	 */
+	protected boolean wrapped = false;
+	
 	public Shape(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -68,6 +73,18 @@ public abstract class Shape {
 	 * @return The wrap companion for this shape. 
 	 */
 	protected abstract Shape getWrapCompanion();
+	
+	/**
+	 * This manipulates the Path object of this shape so that it may wrap when traversed in reverse. This Shape's Path's
+	 * reverse method is called if this method is called when the reverse boolean of the Path is false, and the dereverse()
+	 * method is called if the reverse boolean is true.
+	 */
+	public void reverse() {
+		if (!this.path.isReverse()) 
+			this.path.reverse();
+		else
+			this.path.dereverse();
+	}
 	
 	/**
 	 * Increments the uniqueID variable given that it is less than 0x000FFFFF, the maximum number of instantiations we can
@@ -150,5 +167,40 @@ public abstract class Shape {
 	}
 	
 	public abstract int getShapeID();
+
+	public boolean isReverse() {
+		return this.path.isReverse();
+	}
+
+	public void setReverse(boolean reverse) {
+		 this.path.setReverse(reverse);
+	}
+
+	public boolean isWrapped() {
+		return wrapped;
+	}
+
+	public void setWrapped(boolean wrapped) {
+		this.wrapped = wrapped;
+	}
+	
+	public int getPathDelay() {
+		return this.path.getDelay();
+	}
+	
+	public void setPathDelay(int delay) {
+		if (delay >= 1 && delay <= 10000)
+			this.path.setDelay(delay);
+		else
+			System.out.println("Delay not within range");
+	}
+	
+	public int getAnimationDelay() {
+		return this.animation.getDelay();
+	}
+	
+	public void setAnimationDelay(int delay) {
+		this.animation.setDelay(delay);
+	}
 	
 }

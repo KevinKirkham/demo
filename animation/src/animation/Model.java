@@ -10,7 +10,7 @@ public class Model {
 		spawnOrDelete();
 		updateShapes();
 		if (Model.shapes.size() == 0) {
-			System.out.println("All shapes have left the window, stopping timer...");
+			//System.out.println("All shapes have left the window, stopping timer...");
 		}
 	}
 	
@@ -25,7 +25,7 @@ public class Model {
 	
 	public void spawnOrDelete() {
 		for (int i = 0; i < Model.shapes.size(); i++) {
-			if (Model.shapes.get(i).getX() == Model.shapes.get(i).getSpawnX() && Model.shapes.get(i).getY() == Model.shapes.get(i).getSpawnY()) {
+			if ((Model.shapes.get(i).getX() == Model.shapes.get(i).getSpawnX() && Model.shapes.get(i).getY() == Model.shapes.get(i).getSpawnY()) && !Model.shapes.get(i).isWrapped()) {
 				Shape wrapCompanion = Model.shapes.get(i).getWrapCompanion();
 				Model.shapes.add(wrapCompanion);
 			}

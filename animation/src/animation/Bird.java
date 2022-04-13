@@ -27,7 +27,7 @@ public class Bird extends Shape {
 		super(x, y);
 		this.height = 100;
 		this.width = 100;
-		this.path = new Path(x, y, deltaX, deltaY, height, width);
+		this.path = new Path(20, x, y, deltaX, deltaY, height, width);
 		this.animation = new Animation(20, 10, "/bird_sprite_sheet.png", this.height, this.width);
 		this.shapeID = Bird.PREFIX + Bird.uniqueID;
 		Bird.uniqueID = super.incrementUniqueID(Bird.uniqueID);	// Increment Bird class' uniqueID for the next Bird object
@@ -105,9 +105,12 @@ public class Bird extends Shape {
 		int[] spawn = {path.getSpawnX(), path.getSpawnY()};
 		int[] end = {path.getEndX(), path.getEndY()};
 		
-		Path wrapPath = new Path(path.getDeltaX(), path.getDeltaY(), path.getSlope(), start, spawn,
-				end, path.getPoints(), path.getLeftIntercept(), path.getRightIntercept(), height, width);
+		Path wrapPath = new Path(path.getDelay(), path.getTimer(), path.getDeltaX(), path.getDeltaY(), path.getSlope(), start, spawn,
+				end, path.getPoints(), path.getLeftIntercept(), path.getRightIntercept(), height, width, path.isReverse());
+		
 		Animation wrapAnimation = new Animation(animation.getDelay(), animation.getSprites(), animation.getTimer());
+		
+		this.setWrapped(true);
 		
 		return new Bird(this.shapeID, path.getStartX(), path.getStartY(), wrapPath, wrapAnimation, height, width);
 	}

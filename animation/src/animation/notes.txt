@@ -22,3 +22,5 @@ Known Bugs
 	
 	At certain angles, shapes don't wrap, they just fly off the screen. We need to figure out which angles cause problems and make sure we are spawning
 	wrap companions at the right locations
+	
+	Reverse mode is bugged, shapes don't wrap when reverse mode is enabled for them

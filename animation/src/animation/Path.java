@@ -77,7 +77,22 @@ public class Path {
 	 */
 	private int shapeWidth;
 	
-	public Path(int x, int y, int deltaX, int deltaY, int shapeHeight, int shapeWidth) {
+	/**
+	 * Determines the direction in which the shapes traverses the points. If true, the points are traversed from start to end. Else, they
+	 * are traversed from end to start. 
+	 */
+	private boolean reverse;
+	
+	/**
+	 * 
+	 */
+	private boolean stopped;
+	
+	private int delay;
+	private long timer;
+	
+	
+	public Path(int delay, int x, int y, int deltaX, int deltaY, int shapeHeight, int shapeWidth) {
 		this.x = x;
 		this.y = y;
 		this.deltaX = deltaX;
@@ -85,6 +100,9 @@ public class Path {
 		this.shapeHeight = shapeHeight;
 		this.shapeWidth = shapeWidth;
 
+		this.timer = System.currentTimeMillis();
+		this.delay = delay;
+		
 		this.slope = calculateSlope();
 		this.leftIntercept = calculateLeftIntercept();
 		this.rightIntercept = calculateRightIntercept();
@@ -112,9 +130,11 @@ public class Path {
 	 * @param shapeHeight
 	 * @param shapeWidth
 	 */
-	public Path(int deltaX, int deltaY, double slope, int[] start, int[] spawn, 
-			int[] end, int[][] points, double leftIntercept, double rightIntercept, int shapeHeight, int shapeWidth) {
+	public Path(int delay, long timer, int deltaX, int deltaY, double slope, int[] start, int[] spawn, 
+			int[] end, int[][] points, double leftIntercept, double rightIntercept, int shapeHeight, int shapeWidth, boolean reverse) {
 		
+		this.delay = delay;
+		this.timer = timer;
 		this.deltaX = deltaX;
 		this.deltaY = deltaY;
 		this.slope = slope;
@@ -128,7 +148,11 @@ public class Path {
 		this.rightIntercept = rightIntercept;
 		this.shapeHeight = shapeHeight;
 		this.shapeWidth = shapeWidth;
-		this.pointCounter = 0;
+		
+		if ((this.reverse = reverse))
+			this.pointCounter = this.points.length - 1;
+		else
+			this.pointCounter = 0;
 		
 		//printPath();	// debugging
 	}
@@ -150,24 +174,69 @@ public class Path {
 	 * @return this path's active point
 	 */
 	public int[] advance() {
-		int[] currentPoint = new int[2];
-		currentPoint[0] = points[pointCounter][0];
-		currentPoint[1] = points[pointCounter][1];
-		this.pointCounter++;
-		return currentPoint;
+		
+		// Only change the pointCounter if the delay window has passed
+		long now = System.currentTimeMillis();
+		if (now - this.timer > this.delay) {
+			this.timer = now;	// Update the timer to indicate the last time it was successfully used
+			
+			int[] currentPoint = points[pointCounter];
+			if (!this.reverse)
+				this.pointCounter++;
+			else
+				this.pointCounter--;
+			return currentPoint;	
+		}
+		return points[pointCounter];	// If delay window hasn't passed, return the point that pointCounter is currently pointing to, no change
+
+		
 	}
 	
 	/**
-	 * Sets the current active point of this Path object to the row in the points[][] array indicated by the
-	 * pointCounter variable but traverses the points[][] array in reverse instead of forward.
-	 * @return this path's active point
+	 * Manipulates the points in the points array to allow the existing points to be traversed in reverse without calculated a set of new points for the reverse path.
 	 */
-	public int[] reverse() {
-		int[] currentPoint = new int[2];
-		currentPoint[0] = points[pointCounter][0];
-		currentPoint[1] = points[pointCounter][1];
-		this.pointCounter--;
-		return currentPoint;
+	public void reverse() {
+		this.relocateSpawn();
+		this.swapStartEnd();
+		this.reverse = true;
+	}
+	
+	/**
+	 * Undos the manipulation that the reverse() method did, restoring the path back to its original state. It does this by swapping the start and end points and then
+	 * calculating the spawn coordinate. 
+	 */
+	public void dereverse() {
+		this.relocateSpawn();
+		this.swapStartEnd();
+		this.reverse = false;
+	}
+	
+	/**
+	 * Swaps the values of the start and end coordinates. It accomplishes this by first creating a temporary 2D array in which the value of start is copied. Then start,
+	 * after having a copy of its contents stored into the temp variable, gets overwritten with the contents of end. Lastly, end is overwritten with the contents of the
+	 * temporary variable, which holds the original contents of start.
+	 */
+	private void swapStartEnd() {
+		int[] temp = this.start;
+		this.start = this.end;
+		this.end = temp;
+	}
+
+	/**
+	 * This relocates the point in the path that triggers the spawn of a wrap companion shape. This is performed by finding how many points away from the beginning of the
+	 * path the spawn point is, and then overwriting spawn with the point that is that same distance away from the other end of the path. So if a path consists of 600 
+	 * points and the spawn is point 450, then this method will relocate the spawn to point 150 (calculated by points.length - distance, where distance is how far away spawn
+	 * is from the start of the path).
+	 */
+	private void relocateSpawn() {
+		//int ogSpawn[] = spawn;
+		for (int distance = 0; distance < this.points.length; distance++)
+			if (this.points[distance][0] == this.spawn[0] && this.points[distance][1] == this.spawn[1]) {
+				//System.out.println("Spawn found at index " + distance);
+				//System.out.println("Repositioning to " + (this.points.length - (1 + distance)));
+				this.spawn = this.points[this.points.length - ++distance];
+			}
+		//System.out.print("Spawn (" + spawn[0] + ", " + spawn[1] + ") changed to (" + spawn[0] + ", " + spawn[1] + ")");
 	}
 	
 	/**
@@ -207,14 +276,15 @@ public class Path {
 	 * Prints the points of this Path formatted in two numbered columns of X and Y.
 	 * Mostly used for debugging.
 	 */
-	private void printPath() {
+	public void printPath() {
 		
 		for (int i = 0; i < this.points.length; i++)
 			System.out.println(i + ": " + points[i][0] + " " + points[i][1]);
 		
 		System.out.println("Counter: " + this.pointCounter);
-		System.out.println("revPathStart: (" + this.revPathStart[0] + ", " + this.revPathStart[1] + ")");
-		System.out.println("revPathEnd: (" + this.revPathEnd[0] + ", " + this.revPathEnd[1] + ")");
+		System.out.println("end: (" + this.end[0] + ", " + this.end[1] + ")");
+		System.out.println("start: (" + this.start[0] + ", " + this.start[1] + ")");
+		System.out.println("spawn: (" + this.spawn[0] + ", " + this.spawn[1] + ")");
 	}
 	
 	/**
@@ -393,6 +463,10 @@ public class Path {
 		}
 	}
 	
+	/**
+	 * All we have to do to recalibrate the existing path to be traversed in reverse is just redefine the start, end, and spawn points. Start and end can be swapped,
+	 * and spawn will have to be calculated again. 
+	 */
 	private void setReversePoints() {
 		// Get the point just before the spawn point and assign it revPathStart
 		int i = this.points.length - 1;
@@ -592,6 +666,30 @@ public class Path {
 
 	public void setRevPathEnd(int[] revPathEnd) {
 		this.revPathEnd = revPathEnd;
+	}
+
+	public boolean isReverse() {
+		return reverse;
+	}
+
+	public void setReverse(boolean reverse) {
+		this.reverse = reverse;
+	}
+
+	public int getDelay() {
+		return delay;
+	}
+
+	public void setDelay(int delay) {
+		this.delay = delay;
+	}
+
+	public long getTimer() {
+		return timer;
+	}
+
+	public void setTimer(long timer) {
+		this.timer = timer;
 	}
 	
 }
