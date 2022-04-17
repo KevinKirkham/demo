@@ -1,0 +1,2 @@
+Very much still a work in progress, this was my attempt at an idea that I had to create a fun little text editor. Functionality is limited for now, but my plans are to include keyboard shortcuts like Ctrl + C and Ctrl + some arrow key, and to eventually allow it to write the text given to the program by the user to a .txt file on the user's computer.
+The organization and style of this code was inspired by that of Notch's game Minicraft, the code for which can be found here: https://github.com/skeeto/Minicraft
