@@ -10,10 +10,7 @@ public class CharacterCell {
 		this.x = x;
 		this.y = y;
 		this.value = value;
-		if (this.value == ' ') 
-			setBlackSprite();
-		else
-			this.sprite = FontTable.getSprite(value);
+		this.sprite = FontTable.getSprite(value);
 	}
 	
 	public CharacterCell(int x, int y) {
@@ -34,6 +31,10 @@ public class CharacterCell {
 		for (int y = 0; y < Font.FONT_HEIGHT; y++)
 			for (int x = 0; x < Font.FONT_WIDTH; x++)
 				this.sprite[(y * Font.FONT_WIDTH) + x] = 0;
+	}
+	
+	public void shift(int distance) {
+		this.x += distance;
 	}
 	
 }

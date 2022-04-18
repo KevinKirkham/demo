@@ -83,7 +83,6 @@ public class Driver extends Canvas {
 	}
 
 	public void update() {
-		//matrix.activeColumn += 8;
 		cursor.update(matrix.getActiveX(), matrix.getActiveY());
 		//System.out.println("Active Row: " + matrix.activeRow + " Active column: " + matrix.activeColumn);
 	}
@@ -100,6 +99,7 @@ public class Driver extends Canvas {
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(text);
+		text.setFocusTraversalKeysEnabled(false);	// So all keys are read
 		text.addKeyListener(new InputHandler(text.matrix));
 		text.run();
 	}

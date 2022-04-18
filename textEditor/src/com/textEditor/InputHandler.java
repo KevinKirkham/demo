@@ -22,15 +22,22 @@ public class InputHandler implements KeyListener {
 	private ActionKey left = new ActionKey();
 	private ActionKey right = new ActionKey();
 
-	public InputHandler(CharacterCellMatrix matrix) {
+	public InputHandler(CharacterCellMatrix matrix) {	
 		this.matrix = matrix;
 	}
 
 	public void keyTyped(KeyEvent e) {
-		System.out.println("key typed : " + e.getKeyChar());
+		//System.out.println("key typed : " + e.getKeyChar());
 		if (e.getKeyChar() == '\b') {
-			System.out.println("Backspace");
 			matrix.backspace();
+			return;
+		}
+		if (e.getKeyChar() == '\n') {
+			matrix.newLine();
+			return;
+		}
+		if (e.getKeyChar() == '\t') {
+			matrix.tab();
 			return;
 		}
 		
@@ -39,10 +46,11 @@ public class InputHandler implements KeyListener {
 			matrix.controlC();
 			return;
 		}
-		matrix.keyTyped(e.getKeyChar());
+		if (!control.pressed) matrix.keyTyped(e.getKeyChar());
 	}
 
 	public void keyPressed(KeyEvent e) {
+		//System.out.println("Key Pressed : " + e.getKeyCode());
 		if (e.getKeyCode() == KeyEvent.VK_CONTROL && !this.control.pressed)
 			this.control.toggle();
 		if (e.getKeyCode() == KeyEvent.VK_SHIFT && !this.shift.pressed)
