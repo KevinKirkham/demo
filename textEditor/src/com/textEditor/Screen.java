@@ -2,17 +2,20 @@ package com.textEditor;
 
 public class Screen {
 	
-	public final int LINE_SPACER = 2; // pixels between rows, only relevant when displaying text onscreen
-	public final int CHARACTER_SPACER = 0;
-	
+	private int maxVisibleRows, maxVisibleColumns;
+	private int rowSpacer, colSpacer;
 	public  int[] pixels;
 	private int width;
 	private int height;
 	
-	public Screen(int[] pixels, int width, int height) {
+	public Screen(int[] pixels, int width, int height, int rowSpacer, int colSpacer) {
 		this.pixels = pixels;
 		this.width = width; 
 		this.height = height;
+		this.rowSpacer = rowSpacer;
+		this.colSpacer = colSpacer;
+		this.maxVisibleColumns = width / Font.FONT_WIDTH;
+		this.maxVisibleRows = height / Font.FONT_HEIGHT;
 	}
 	
 	public void renderBackground() {
@@ -44,5 +47,37 @@ public class Screen {
 	public void setPixels(int[] pixels) {
 		this.pixels = pixels;
 	}
+	
+	public int getColSpacer() {
+		return this.colSpacer;
+	}
+	
+	public int getRowSpacer() {
+		return this.rowSpacer;
+	}
 
+	public int getMaxVisibleRows() {
+		return maxVisibleRows;
+	}
+
+	public void setMaxVisibleRows(int maxVisibleRows) {
+		this.maxVisibleRows = maxVisibleRows;
+	}
+
+	public int getMaxVisibleColumns() {
+		return maxVisibleColumns;
+	}
+
+	public void setMaxVisibleColumns(int maxVisibleColumns) {
+		this.maxVisibleColumns = maxVisibleColumns;
+	}
+
+	public void setRowSpacer(int rowSpacer) {
+		this.rowSpacer = rowSpacer;
+	}
+
+	public void setColSpacer(int colSpacer) {
+		this.colSpacer = colSpacer;
+	}
+	
 }

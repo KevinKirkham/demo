@@ -18,10 +18,12 @@ public class Driver extends Canvas {
 	public static BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	public static int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	public static int updatesPerSecond = 30;
-	public Screen screen = new Screen(pixels, WIDTH, HEIGHT);
+	public Screen screen = new Screen(pixels, WIDTH, HEIGHT, 1, 0);
 	public Font font = new Font();
-	CharacterCellMatrix matrix = new CharacterCellMatrix();
-	Cursor cursor = new Cursor();
+	
+	CharacterMatrixTraversal data; 
+	
+	Cursor cursor = new Cursor(screen.getWidth(), screen.getHeight(), screen.getRowSpacer(), screen.getColSpacer());
 	
 	public void run() {
 		long lastUpdate = System.nanoTime();
@@ -58,7 +60,7 @@ public class Driver extends Canvas {
 	}
 
 	public void render() {
-		// 1) get the BufferStrategy present in this Canvas object
+		// 1) get the BufferStrategy present in this Canvas object (probably overkill for a text editor)
 		BufferStrategy bs = this.getBufferStrategy();
 		if (bs == null) {
 			createBufferStrategy(3); // Triple buffering - if you don't do this you have screen tearing
@@ -67,9 +69,7 @@ public class Driver extends Canvas {
 
 		// 2) Manipulate the pixels of your image to your desire
 		screen.renderBackground();
-		
-		matrix.render(screen);
-		
+		data.render();
 		cursor.render(screen);
 		
 		// 3) Using the Graphics object of the BufferStrategy object, draw our
@@ -83,7 +83,7 @@ public class Driver extends Canvas {
 	}
 
 	public void update() {
-		cursor.update(matrix.getActiveX(), matrix.getActiveY());
+		cursor.blink();
 		//System.out.println("Active Row: " + matrix.activeRow + " Active column: " + matrix.activeColumn);
 	}
 
@@ -100,7 +100,8 @@ public class Driver extends Canvas {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(text);
 		text.setFocusTraversalKeysEnabled(false);	// So all keys are read
-		text.addKeyListener(new InputHandler(text.matrix));
+		text.data = new CharacterMatrixTraversal(text.screen, text.cursor);
+		text.addKeyListener(new InputHandler(text.data));
 		text.run();
 	}
 }
