@@ -58,6 +58,16 @@ public class Cursor {
 			for (int xTrav = x; xTrav < x + width; xTrav++)
 				screen.pixels[(yTrav * screen.getWidth()) + xTrav] = 0x00F91D;
 	}
+	
+	public void render(Screen screen, int dataCol, int dataRow) {
+		// Set the value of X and Y based on dataCol and dataRow
+		if (!visible)
+			return;
+		int spriteCounter = 0;
+		for (int yTrav = y; yTrav < y + height; yTrav++)
+			for (int xTrav = x; xTrav < x + width; xTrav++)
+				screen.pixels[(yTrav * screen.getWidth()) + xTrav] = 0x00F91D;
+	}
 
 	// I don't know why the cursor displays at the wrong location when activeColumn
 	// is 40 and firstVisibleColumn is 1

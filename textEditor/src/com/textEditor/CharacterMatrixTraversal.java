@@ -6,40 +6,79 @@ public class CharacterMatrixTraversal {
 	Cursor cursor;
 	Screen screen;
 
-	int activeRow = 0;
-	int activeColumn = 0;
+	private int dataCol;
+	private int dataRow;
+	private int preferredCol;
 	int firstVisibleRow = 0;
-	int firstVisibleColumn = 0;
+	int firstVisibleCol = 0;
 	int lastVisibleRow;
-	int lastVisibleColumn;
+	int lastVisibleCol;
 
-	public CharacterMatrixTraversal(char[][] chars, Screen screen, Cursor cursor) {
-		this.data = new MutableCharacterMatrix(chars);
-		this.cursor = cursor;
-		this.screen = screen;
-		this.lastVisibleRow = screen.getMaxVisibleRows();
-		this.lastVisibleColumn = screen.getMaxVisibleColumns();
+	private class Cursor {
+
+		private int width = 3;
+		private int height = Font.FONT_HEIGHT;
+		private long timer = System.currentTimeMillis();
+		private long blinkDelay = 400;
+		private boolean visible = true;
+
+		public void blink() {
+			long now = System.currentTimeMillis();
+			if ((now - this.timer) > this.blinkDelay) {
+				this.visible = !this.visible;
+				this.timer = now;
+			}
+		}
+
+		public void prolongBlink() {
+			this.timer = System.currentTimeMillis();
+			this.visible = true;
+		}
+
+		public void render() {
+			if (!visible)
+				return;
+			int x = (dataCol - firstVisibleCol) * (Font.FONT_WIDTH + screen.getColSpacer());
+			int y = (dataRow - firstVisibleRow) * (Font.FONT_HEIGHT + screen.getRowSpacer());
+			int spriteCounter = 0;
+			for (int yTrav = y; yTrav < y + height; yTrav++)
+				for (int xTrav = x; xTrav < x + width; xTrav++)
+					screen.pixels[(yTrav * screen.getWidth()) + xTrav] = 0x00F91D;
+		}
+
 	}
 
-	public CharacterMatrixTraversal(Screen screen, Cursor cursor) {
-		this.data = new MutableCharacterMatrix();
-		this.cursor = cursor;
+	public CharacterMatrixTraversal(char[][] chars, Screen screen) {
+		this.data = new MutableCharacterMatrix(chars);
+		this.cursor = new Cursor();
 		this.screen = screen;
 		this.lastVisibleRow = screen.getMaxVisibleRows();
-		this.lastVisibleColumn = screen.getMaxVisibleColumns();
-		System.out.println("Active Row: " + activeRow + "\tactiveColumn: " + activeColumn);
+		this.lastVisibleCol = screen.getMaxVisibleColumns();
+	}
+
+	public CharacterMatrixTraversal(Screen screen) {
+		this.data = new MutableCharacterMatrix();
+		this.cursor = new Cursor();
+		this.screen = screen;
+		this.lastVisibleRow = screen.getMaxVisibleRows() - 1;
+		this.lastVisibleCol = screen.getMaxVisibleColumns() - 1;
+		System.out.println("Active Row: " + dataRow + "\tactiveColumn: " + dataCol);
 	}
 
 	public void render() {
 		int x = 0;
 		int y = 0;
 		for (int i = firstVisibleRow; i <= lastVisibleRow
-				&& i < data.numRows(); i++, y += Font.FONT_HEIGHT + screen.getRowSpacer(), x = 0) {
-			for (int j = firstVisibleColumn; j < data.getRow(i).length
-					&& j <= lastVisibleColumn; j++, x += Font.FONT_WIDTH + screen.getColSpacer()) {
+				&& i < data.size(); i++, y += Font.FONT_HEIGHT + screen.getRowSpacer(), x = 0) {
+			for (int j = firstVisibleCol; j < data.getRow(i).length
+					&& j <= lastVisibleCol; j++, x += Font.FONT_WIDTH + screen.getColSpacer()) {
 				renderCharacter(data.getCharacter(i, j), x, y, screen);
 			}
 		}
+
+		// Render cursor according to the active column and row after all onscreen
+		// characters have been rendered
+		cursor.render();
 	}
 
 	public void renderCharacter(char c, int x, int y, Screen screen) {
@@ -55,173 +94,193 @@ public class CharacterMatrixTraversal {
 	}
 
 	public void keyTyped(char c) {
-		this.data.setRow(activeRow, this.data.insertCharacter(this.data.getRow(activeRow), c, activeColumn));
-		incrementActiveColumn();
-
-		if (activeColumn - firstVisibleColumn == screen.getMaxVisibleColumns())
+		this.data.insertCharacter(dataRow, dataCol, c);
+		preferredCol = ++dataCol;
+		if (dataCol - firstVisibleCol >= screen.getMaxVisibleColumns())
 			scrollRight();
-
-		System.out.println("Active Row: " + activeRow + "\tactiveColumn: " + activeColumn);
-		System.out.println("First Visible " + firstVisibleColumn + "\tLast Visible " + lastVisibleColumn);
+		System.out.println("dataRow: " + dataRow + "\tdataCol: " + dataCol);
+		System.out.println("First VisibleCol: " + firstVisibleCol + "\tLastVisibleCol: " + lastVisibleCol);
+		System.out.println("First VisibleRow: " + firstVisibleRow + "\tLastVisibleRow: " + lastVisibleRow);
 	}
 
 	public void enter() {
-		this.data.setData(data.insertRow(this.data.getData(), new char[0], activeRow + 1));
-		char[] segment = data.rowSegment(activeRow, activeColumn, data.getRow(activeRow).length - 1);
-		data.setRow(activeRow + 1, data.appendRow(data.getRow(activeRow + 1), segment));
-		data.setRow(activeRow, data.truncateRow(activeRow, activeColumn));
-		incrementActiveRow();
-		activeColumn = 0;
-		cursor.setX(0);
-		firstVisibleColumn = 0;
-		lastVisibleColumn = screen.getMaxVisibleColumns() - 1;
+		this.data.lineBreak(dataRow++, dataCol);
+		preferredCol = dataCol = 0;
+		if (firstVisibleCol != 0) {
+			firstVisibleCol = 0;
+			lastVisibleCol = screen.getMaxVisibleColumns() - 1;
+		}
 
-		if (activeRow - firstVisibleRow == screen.getMaxVisibleRows())
+		if (dataRow - firstVisibleRow >= screen.getMaxVisibleRows() - 1)
 			scrollDown();
 
-		System.out.println("Active Row: " + activeRow + "\tactiveColumn: " + activeColumn);
-		System.out.println("First Visible " + firstVisibleColumn + "\tLast Visible " + lastVisibleColumn);
+		System.out.println("dataRow: " + dataRow + "\tdataCol: " + dataCol);
+		System.out.println("First VisibleCol: " + firstVisibleCol + "\tLastVisibleCol: " + lastVisibleCol);
+		System.out.println("First VisibleRow: " + firstVisibleRow + "\tLastVisibleRow: " + lastVisibleRow);
 	}
 
 	public void backspace() {
-		if (activeRow == 0 && activeColumn == 0)
+		if (dataRow == 0 && dataCol == 0)
 			return;
 
-		if (activeColumn != 0) {
-			data.setRow(activeRow, data.deleteCharacter(data.getRow(activeRow), --activeColumn));
-			scrollLeft();
+		if (dataCol != 0) {
+			data.deleteCharacter(dataRow, --dataCol);
+
+			if ((dataCol - firstVisibleCol) < screen.getMaxVisibleColumns() / 5)
+				jumpCol(-(screen.getMaxVisibleColumns() / 5));
+
 		} else {
+			System.out.println("Not at beginning of line");
 			scrollToEndOfLine();
-			data.setRow(activeRow, data.appendRow(data.getRow(activeRow), data.getRow(activeRow + 1)));
-			data.setData(data.deleteRow(data.getData(), activeRow + 1));
+			data.appendRow(dataRow, data.getRow(dataRow + 1));
+			data.deleteRow(dataRow + 1);
 		}
 
-		cursor.calibrateX(activeColumn, firstVisibleColumn);
-		cursor.calibrateY(activeRow, firstVisibleRow);
+		System.out.println("dataRow: " + dataRow + "\tdataCol: " + dataCol);
+		System.out.println("First VisibleCol: " + firstVisibleCol + "\tLastVisibleCol: " + lastVisibleCol);
+		System.out.println("First VisibleRow: " + firstVisibleRow + "\tLastVisibleRow: " + lastVisibleRow);
+
 	}
 
-	private void scrollToEndOfLine() {
-		activeColumn = data.getRow(activeRow - 1).length;
-		if (activeColumn > screen.getMaxVisibleColumns()) {
-			lastVisibleColumn = activeColumn + 1;
-			firstVisibleColumn = lastVisibleColumn - screen.getMaxVisibleColumns();
+	public void scrollToEndOfLine() {
+		dataCol = data.getRow(dataRow - 1).length;
+		if (dataCol > screen.getMaxVisibleColumns()) {
+			lastVisibleCol = dataCol + 1;
+			firstVisibleCol = lastVisibleCol - screen.getMaxVisibleColumns();
 		} else {
-			lastVisibleColumn = screen.getMaxVisibleColumns() - 1;
-			firstVisibleColumn = 0;
+			lastVisibleCol = screen.getMaxVisibleColumns() - 1;
+			firstVisibleCol = 0;
 		}
 
-		activeRow--;
-		cursor.calibrateX(activeColumn, firstVisibleColumn);
-		cursor.calibrateY(activeRow, firstVisibleRow);
-	}
-
-	// For when you hit right when the cursor is at the end of the line
-	private void scrollToBeginningOfLine() {
-		if (data.getData().length == activeRow + 1) // Do nothing if you are at the end of the line
-			return;
-		activeRow++;
-		activeColumn = 0;
-		lastVisibleColumn = screen.getMaxVisibleColumns() - 1;
-		firstVisibleColumn = 0;
-		cursor.calibrateX(activeColumn, firstVisibleColumn);
-		cursor.calibrateY(activeRow, firstVisibleRow);
+		dataRow--;
 	}
 
 	public void up() {
-		if (activeRow == 0)
-			return; // Do nothing if you're already at the top of the screen
-		else if (cursor.getY() == 0) {
+		if (dataRow - 1 < 0)
+			return;
+		dataRow--;
+		colPriority();
+
+		if (data.getRow(dataRow).length < dataCol)
+			dataCol = data.getRow(dataRow).length;
+
+		if (lastVisibleRow - dataRow > screen.getMaxVisibleRows() - 1)
 			scrollUp();
-			decrementActiveRow();
-		} else
-			decrementActiveRow();
-		
-		if (data.getRow(activeRow).length < data.getRow(activeRow + 1).length)
-			activeColumn = data.getRow(activeRow).length;
-		
-		cursor.calibrateX(activeColumn, firstVisibleColumn);
-		cursor.calibrateY(activeRow, firstVisibleRow);
+
+		if (dataCol - (screen.getMaxVisibleColumns() / 5) < 0) {
+			firstVisibleCol = 0;
+			lastVisibleCol = firstVisibleCol + (screen.getMaxVisibleColumns() - 1);
+		} else {
+			firstVisibleCol = dataCol - (screen.getMaxVisibleColumns() / 5);
+			lastVisibleCol = firstVisibleCol + (screen.getMaxVisibleColumns() - 1);
+		}
+		System.out.println("dataRow: " + dataRow + "\tdataCol: " + dataCol);
+		System.out.println("First VisibleCol: " + firstVisibleCol + "\tLastVisibleCol: " + lastVisibleCol);
+		System.out.println("First VisibleRow: " + firstVisibleRow + "\tLastVisibleRow: " + lastVisibleRow);
+
 	}
 
 	public void down() {
-		if (activeRow + 1 == data.getData().length)
+		if (dataRow + 1 >= data.size()) // Where data.size() returns the number of rows in the data matrix
 			return;
-		if (cursor.getY() == screen.getHeight() - (Font.FONT_HEIGHT + screen.getRowSpacer())) {
+		dataRow++;
+		colPriority();
+
+		if (data.getRow(dataRow).length < dataCol)
+			dataCol = data.getRow(dataRow).length;
+
+		if (dataRow - firstVisibleRow > screen.getMaxVisibleRows() - 1)
 			scrollDown();
-			incrementActiveRow();
-		} else
-			incrementActiveRow();
-		
-		if (data.getRow(activeRow).length < data.getRow(activeRow - 1).length)
-			activeColumn = data.getRow(activeRow).length;
 
-		cursor.calibrateX(activeColumn, firstVisibleColumn);
-		cursor.calibrateY(activeRow, firstVisibleRow);
+		if (lastVisibleCol - dataCol >= screen.getMaxVisibleColumns()) {
+			firstVisibleCol = dataCol;
+			lastVisibleCol = firstVisibleCol + (screen.getMaxVisibleColumns() - 1);
+		}
+
+		System.out.println("dataRow: " + dataRow + "\tdataCol: " + dataCol);
+		System.out.println("First VisibleCol: " + firstVisibleCol + "\tLastVisibleCol: " + lastVisibleCol);
+		System.out.println("First VisibleRow: " + firstVisibleRow + "\tLastVisibleRow: " + lastVisibleRow);
 	}
 
+	// Changing preferredCol here
 	public void left() {
-		if (activeColumn == 0 && activeRow > 0)
-			scrollToEndOfLine();
-		else if (cursor.getX() == 0) {
-			scrollLeft();
-			decrementActiveColumn();
-		} else
-			decrementActiveColumn();
+		if (dataCol == 0 && dataRow == 0)
+			return;
 
-		cursor.calibrateX(activeColumn, firstVisibleColumn);
-		System.out.println("Active Row: " + activeRow + "\tactiveColumn: " + activeColumn);
+		if (dataCol == 0 && dataRow > 0) {
+			dataRow--;
+			preferredCol = dataCol = data.getRow(dataRow).length;
+
+			if (lastVisibleRow - dataRow > screen.getMaxVisibleRows() - 1)
+				scrollUp();
+
+			if (data.getRow(dataRow).length >= lastVisibleCol) {
+				lastVisibleCol = data.getRow(dataRow).length;
+				firstVisibleCol = lastVisibleCol - (screen.getMaxVisibleColumns() - 1);
+			}
+
+		} else {
+			preferredCol = --dataCol;
+			if ((dataCol - firstVisibleCol) < screen.getMaxVisibleColumns() / 5)
+				jumpCol(-(screen.getMaxVisibleColumns() / 5));
+		}
+
+		System.out.println("dataRow: " + dataRow + "\tdataCol: " + dataCol);
+		System.out.println("First VisibleCol: " + firstVisibleCol + "\tLastVisibleCol: " + lastVisibleCol);
+		System.out.println("First VisibleRow: " + firstVisibleRow + "\tLastVisibleRow: " + lastVisibleRow);
 	}
 
+	// Changing preferredCol here
 	public void right() {
-		if (activeColumn == data.getRow(activeRow).length)
-			scrollToBeginningOfLine();
-		else if (cursor.getX() == screen.getWidth() - (Font.FONT_WIDTH + screen.getColSpacer())) {
-			scrollRight(); // If cursor X is in its rightmost position
-			incrementActiveColumn();
-		} else
-			incrementActiveColumn();
+		// At end of line, right should put cursor on line below current one
+		if (dataCol == data.getRow(dataRow).length && dataRow < data.size() - 1) {
 
-		cursor.calibrateX(activeColumn, firstVisibleColumn);
-		System.out.println("Active Row: " + activeRow + "\tactiveColumn: " + activeColumn);
+			System.out.println("At the end of the line");
+
+			preferredCol = dataCol = 0; // update preferredCol and dataCol to 0
+			dataRow++;
+
+			if (dataRow - firstVisibleRow > screen.getMaxVisibleRows() - 1)
+				scrollDown();
+
+			if (firstVisibleCol != 0) {
+				firstVisibleCol = 0;
+				lastVisibleCol = firstVisibleCol + (screen.getMaxVisibleColumns() - 1);
+			}
+
+		} else { // Somewhere before the end of the line
+
+			if (dataCol != data.getRow(dataRow).length)
+				preferredCol = ++dataCol;
+
+			if ((lastVisibleCol - dataCol) < screen.getMaxVisibleColumns() / 5)
+				jumpCol(screen.getMaxVisibleColumns() / 5);
+
+		}
+		System.out.println("dataRow: " + dataRow + "\tdataCol: " + dataCol);
+		System.out.println("First VisibleCol: " + firstVisibleCol + "\tLastVisibleCol: " + lastVisibleCol);
+		System.out.println("First VisibleRow: " + firstVisibleRow + "\tLastVisibleRow: " + lastVisibleRow);
 	}
 
-	private void incrementActiveRow() {
-		activeRow++;
-		cursor.calibrateY(activeRow, firstVisibleRow);
+	// Have to change the column if the line doesn't have as many as the previous
+	// line we were on
+	private void colPriority() {
+		if (data.getRow(dataRow).length < preferredCol)
+			dataCol = data.getRow(dataRow).length;
 	}
 
-	private void decrementActiveRow() {
-		activeRow--;
-		cursor.calibrateY(activeRow, firstVisibleRow);
-	}
-
-	private void decrementActiveColumn() {
-		if (--activeColumn < 0)
-			activeColumn = 0;
-		if (firstVisibleColumn == 0)
-			cursor.calibrateX(activeColumn, firstVisibleColumn);
-	}
-
-	private void incrementActiveColumn() {
-		activeColumn++;
-		cursor.calibrateX(activeColumn, firstVisibleColumn);
-	}
-
-	private void setActiveRow(int i) {
-		activeRow = i;
-		cursor.setY(i - firstVisibleRow);
-	}
-
-	private void setActiveColumn(int i) {
-		activeColumn = i;
-		cursor.setX(i * (Font.FONT_WIDTH + screen.getColSpacer()));
-	}
-
-	private void scrollUp() {
-		if (--firstVisibleRow < 0)
-			firstVisibleRow++;
-		if (--lastVisibleRow < 0)
-			lastVisibleRow++;
+	public void jumpCol(int amount) {
+		if (firstVisibleCol + amount < 0) {
+			firstVisibleCol = 0;
+			lastVisibleCol = firstVisibleCol + (screen.getMaxVisibleColumns() - 1);
+		} 
+		else if (lastVisibleCol + amount > data.getRow(dataRow).length && amount > 0) {
+			lastVisibleCol = data.getRow(dataRow).length;
+			firstVisibleCol = lastVisibleCol - (screen.getMaxVisibleColumns() - 1);
+		} else {
+			firstVisibleCol += amount;
+			lastVisibleCol = firstVisibleCol + (screen.getMaxVisibleColumns() - 1);
+		}
 	}
 
 	private void scrollDown() {
@@ -229,26 +288,19 @@ public class CharacterMatrixTraversal {
 		lastVisibleRow++;
 	}
 
+	private void scrollUp() {
+		firstVisibleRow--;
+		lastVisibleRow--;
+	}
+
 	private void scrollLeft() {
-		System.out.println("Scrolling Left");
-		if (--firstVisibleColumn < 0)
-			firstVisibleColumn++;
-		if (--lastVisibleColumn < screen.getMaxVisibleColumns() - 1)
-			lastVisibleColumn++;
+		firstVisibleCol--;
+		lastVisibleCol--;
 	}
 
 	private void scrollRight() {
-		System.out.println("Scrolling Right");
-		firstVisibleColumn++;
-		lastVisibleColumn++;
-	}
-
-	public int getActiveRow() {
-		return this.activeRow;
-	}
-
-	public int getActiveColumn() {
-		return this.activeColumn;
+		firstVisibleCol++;
+		lastVisibleCol++;
 	}
 
 }

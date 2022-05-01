@@ -57,7 +57,6 @@ public class InputHandler implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_SHIFT && !this.shift.pressed)
 			this.shift.toggle();
 		if (e.getKeyCode() == KeyEvent.VK_UP && !this.up.pressed) {
-			this.up.toggle();
 			matrix.up();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN && !this.down.pressed)

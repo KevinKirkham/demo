@@ -14,8 +14,8 @@ public class Screen {
 		this.height = height;
 		this.rowSpacer = rowSpacer;
 		this.colSpacer = colSpacer;
-		this.maxVisibleColumns = width / Font.FONT_WIDTH;
-		this.maxVisibleRows = height / Font.FONT_HEIGHT;
+		this.maxVisibleColumns = width / (Font.FONT_WIDTH + colSpacer);
+		this.maxVisibleRows = height / (Font.FONT_HEIGHT + rowSpacer);
 	}
 	
 	public void renderBackground() {

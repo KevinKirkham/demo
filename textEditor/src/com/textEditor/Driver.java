@@ -11,10 +11,10 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 public class Driver extends Canvas {
-
-	public static final int WIDTH = 320;
-	public static final int HEIGHT = 200;
-	public static final int SCALE = 3;
+	// OG resolution: 320 x 200
+	public static final int WIDTH = 640;
+	public static final int HEIGHT = 480;
+	public static final int SCALE = 2;
 	public static BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	public static int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	public static int updatesPerSecond = 30;
@@ -23,7 +23,7 @@ public class Driver extends Canvas {
 	
 	CharacterMatrixTraversal data; 
 	
-	Cursor cursor = new Cursor(screen.getWidth(), screen.getHeight(), screen.getRowSpacer(), screen.getColSpacer());
+	//Cursor cursor = new Cursor(screen.getWidth(), screen.getHeight(), screen.getRowSpacer(), screen.getColSpacer());
 	
 	public void run() {
 		long lastUpdate = System.nanoTime();
@@ -70,7 +70,7 @@ public class Driver extends Canvas {
 		// 2) Manipulate the pixels of your image to your desire
 		screen.renderBackground();
 		data.render();
-		cursor.render(screen);
+		//cursor.render(screen);
 		
 		// 3) Using the Graphics object of the BufferStrategy object, draw our
 		// BufferedImage, dispose of the Graphics object, then show the alterations made
@@ -83,7 +83,7 @@ public class Driver extends Canvas {
 	}
 
 	public void update() {
-		cursor.blink();
+		//cursor.blink();
 		//System.out.println("Active Row: " + matrix.activeRow + " Active column: " + matrix.activeColumn);
 	}
 
@@ -100,7 +100,7 @@ public class Driver extends Canvas {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(text);
 		text.setFocusTraversalKeysEnabled(false);	// So all keys are read
-		text.data = new CharacterMatrixTraversal(text.screen, text.cursor);
+		text.data = new CharacterMatrixTraversal(text.screen);
 		text.addKeyListener(new InputHandler(text.data));
 		text.run();
 	}

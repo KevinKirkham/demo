@@ -18,7 +18,13 @@ public class FontTable {
 	}
 	
 	public static int[] getSprite(char c) {
-		return map.get(new Character(c));
+		try {
+			return map.get(new Character(c));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new int[0];
 	}
 
 	public static void upperCase() {
@@ -34,16 +40,22 @@ public class FontTable {
 	}
 
 	public static void numbers() {
+		System.out.println("Numbers");
 		int fontPointer = 0;
-		for (int i = 48; i < 57; i++)
+		for (int i = 48; i < 58; i++)
 			map.put((char) i, Font.numbers[fontPointer++]);
+		
+		map.put((char) 92, Font.special[fontPointer++]);
+		map.put((char) 94, Font.special[fontPointer++]);
 	}
 	
 	public static void special() {
 		int fontPointer = 0;
 		
-		for (int i = 33; i < 47; i++)
+		for (int i = 33; i < 47; i++) {
 			map.put((char) i, Font.special[fontPointer++]);
+			System.out.println("Putting " + (char) i);
+		}
 		
 		for (int i = 58; i < 63; i++)
 			map.put((char) i, Font.special[fontPointer++]);

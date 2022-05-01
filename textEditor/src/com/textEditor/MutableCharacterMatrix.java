@@ -58,6 +58,34 @@ public class MutableCharacterMatrix {
 	}
 
 	/**
+	 * Inserts a character into a row of the matrix.
+	 * 
+	 * @param row   index of the target array
+	 * @param c     the character to be inserted
+	 * @param index the index of the row that the inserted element is to occupy
+	 *              after insertion
+	 * @return the new array containing the added character
+	 */
+	public char[] insertCharacter(int row, int index, char c) {
+		char[] newRow = new char[this.data[row].length + 1];
+
+		// Copy each element preceding the specified index
+		int i = 0;
+
+		for (; i < index; i++)
+			newRow[i] = this.data[row][i];
+
+		// Add in the index
+		newRow[i] = c;
+
+		// Copy the remaining elements into the new array
+		for (; i < this.data[row].length; i++)
+			newRow[i + 1] = this.data[row][i];
+
+		return this.data[row] = newRow;
+	}
+
+	/**
 	 * Inserts a row into the matrix.
 	 * 
 	 * @param matrix the existing matrix
@@ -82,6 +110,32 @@ public class MutableCharacterMatrix {
 			newMatrix[i + 1] = matrix[i];
 
 		return newMatrix;
+	}
+
+	/**
+	 * Adds the supplied char array to this data matrix.
+	 * 
+	 * @param newRow Row to be added to this matrix
+	 * @param index  Row index that the new row will occupy once inserted
+	 * @return The new data matrix with the inserted row
+	 */
+	public char[][] insertRow(int index, char[] newRow) {
+
+		char[][] newMatrix = new char[this.data.length + 1][];
+
+		// Copy each element preceding the specified index
+		int i = 0;
+		for (; i < index; i++)
+			newMatrix[i] = this.data[i];
+
+		// Add in the index
+		newMatrix[i] = newRow;
+
+		// Copy the remaining elements into the new array
+		for (; i < this.data.length; i++)
+			newMatrix[i + 1] = this.data[i];
+
+		return this.data = newMatrix;
 	}
 
 	/**
@@ -110,6 +164,26 @@ public class MutableCharacterMatrix {
 
 		return newMatrix;
 	}
+	
+	public char[][] deleteRow(int index) {
+		if (data.length == 0)
+			throw new IndexOutOfBoundsException("Matrix doesn't have any rows to delete!");
+
+		char[][] newMatrix = new char[data.length - 1][];
+
+		// Copy each element preceding the specified index
+		int i = 0; // tracking the original array
+		for (; i < index; i++)
+			newMatrix[i] = data[i];
+
+		i++;
+
+		// Copy the remaining elements into the new array
+		for (; i < data.length; i++)
+			newMatrix[i - 1] = data[i];
+
+		return data = newMatrix;
+	}
 
 	/**
 	 * Deletes a character from a single row of the matrix.
@@ -137,6 +211,26 @@ public class MutableCharacterMatrix {
 
 		return newRow;
 	}
+	
+	public char[] deleteCharacter(int row, int index) {
+		if (data[row].length == 0)
+			throw new IndexOutOfBoundsException("Row " + index + " doesn't have any elements.");
+
+		char[] newRow = new char[data[row].length - 1];
+
+		// Copy each element preceding the specified index
+		int i = 0; // tracking the original array
+		for (; i < index; i++)
+			newRow[i] = data[row][i];
+
+		i++;	// Increment i so we don't copy over the deleted character
+
+		// Copy the remaining elements into the new array
+		for (; i < data[row].length; i++)
+			newRow[i - 1] = data[row][i];
+
+		return this.data[row] = newRow;
+	}
 
 	/**
 	 * Appends the contents of one row onto another row.
@@ -157,6 +251,18 @@ public class MutableCharacterMatrix {
 
 		return newRow;
 	}
+	
+	public char[] appendRow(int row, char[] addition) {
+		char[] newRow = new char[data[row].length + addition.length];
+
+		for (int i = 0; i < data[row].length; i++)
+			newRow[i] = data[row][i];
+
+		for (int i = 0; i < addition.length; i++)
+			newRow[data[row].length + i] = addition[i];
+
+		return data[row] = newRow;
+	}
 
 	/**
 	 * Returns the segment of the row between the two specified indices, inclusive
@@ -175,6 +281,29 @@ public class MutableCharacterMatrix {
 			segment[i] = this.data[rowIndex][i + start];
 
 		return segment;
+	}
+
+	/**
+	 * Creates a break in the specified row at the specified index, putting the
+	 * contents of the array from the break point on to the end of the row into a
+	 * new row placed below the specified row.
+	 * 
+	 * @param row   the row which is to be broken
+	 * @param index the index at which the break is to occur (first character of
+	 *              newly created line)
+	 */
+	public void lineBreak(int row, int index) {
+		char[] beforeBreak = new char[index];
+		for (int i = 0; i < index; i++)
+			beforeBreak[i] = this.data[row][i];
+
+		char[] afterBreak = new char[this.data[row].length - index];
+		for (int i = 0; i < this.data[row].length - index; i++)
+			afterBreak[i] = this.data[row][i + index];
+
+		setRow(row, beforeBreak);
+		insertRow(row + 1, afterBreak);
+
 	}
 
 	/**
@@ -241,7 +370,7 @@ public class MutableCharacterMatrix {
 	 * 
 	 * @return the number of rows in the 2D array.
 	 */
-	public int numRows() {
+	public int size() {
 		return this.data.length;
 	}
 
