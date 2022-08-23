@@ -1,0 +1,1 @@
+The purpose of this file is to create a directory in which to put my web crawler project.
